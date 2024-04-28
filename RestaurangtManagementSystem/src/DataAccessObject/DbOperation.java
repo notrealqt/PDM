@@ -9,7 +9,9 @@ public class DbOperation {
             Connection con = ConnectionProvider.getCon();
             Statement st = con.createStatement();
             st.executeUpdate(query);
-            if()
+            if(!msg.equals("")) {
+                JOptionPane.showMessageDialog(null, msg);
+            }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e, "Message", JOptionPane.ERROR_MESSAGE);
         }
