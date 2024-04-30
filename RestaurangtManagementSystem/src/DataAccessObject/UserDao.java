@@ -29,6 +29,25 @@ public static User logIn(String email, String password) {
     return user;
 }
 
+    public static User getSecurityQuestion (String email) {
+        User user = null;
+        try {
+            ResultSet rs = DbOperation.getData("Select * from user where email = '"+email+ "' ");
+            while (rs.next() ) {
+                user = new User();
+                user.setSecurityQuestion(rs.getString("securityQuestion"));
+                user.setAnswer(rs.getString("answer"));
+            }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null,e);
+            
+        }
+        return user;
+    }
 
-
+    public static void update(String email, String newPassword) {
+        String query = "update user set password = '"+newPassword+"' where email = '"+email+"'  ";
+        DbOperation.setDataOrDelete(query, "Password changed successfully");
+    }
 }

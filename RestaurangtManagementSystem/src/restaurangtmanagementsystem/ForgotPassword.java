@@ -4,6 +4,10 @@
  */
 package restaurangtmanagementsystem;
 
+import javax.swing.JOptionPane;
+import DataAccessObject.*;
+import model.User;
+
 /**
  *
  * @author USER
@@ -44,9 +48,17 @@ public class ForgotPassword extends javax.swing.JFrame {
         }
     }
 
-    public validateField() {
+    public void validateField() {
         String password = txtNewPassword.getText();
         String answer = txtAnswer.getText();
+        String securityQuestion = txtSecurityQuestion.getText();
+
+        if (!password.equals("") && !answer.equals("") && !securityQuestion.equals("")) {
+            btnUpdate.setEnabled(true);
+        }
+        else {
+            btnUpdate.setEnabled(false);
+        }
     }
 
 
@@ -101,15 +113,35 @@ public class ForgotPassword extends javax.swing.JFrame {
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 440, -1, -1));
 
         txtEmail.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEmailKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 310, 283, -1));
 
         txtSecurityQuestion.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txtSecurityQuestion.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtSecurityQuestionKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtSecurityQuestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 350, 283, -1));
 
         txtAnswer.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txtAnswer.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAnswerKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtAnswer, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 390, 283, -1));
 
         txtNewPassword.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        txtNewPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtNewPasswordKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtNewPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 440, 283, -1));
 
         btnExit.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -123,21 +155,46 @@ public class ForgotPassword extends javax.swing.JFrame {
 
         btnUpdate.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnUpdate, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 480, -1, -1));
 
         btnClear.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnClear.setText("Clear");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 480, -1, -1));
 
         btnLogIn.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnLogIn.setText("Log In");
+        btnLogIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogInActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnLogIn, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 520, -1, -1));
 
         btnSignUp.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnSignUp.setText("Sign Up");
+        btnSignUp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignUpActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 520, -1, -1));
 
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(860, 310, -1, -1));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/firstpage_backgrounf.png"))); // NOI18N
@@ -148,8 +205,72 @@ public class ForgotPassword extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        // TODO add your handling code here:
+        int a = JOptionPane.showConfirmDialog(null, "Do you really want to close the application?", "Select", JOptionPane.YES_NO_OPTION);
+        if (a == 0 ) {
+            System.exit(0);
+        }
+        
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
+        validateEmail();
+    }//GEN-LAST:event_txtEmailKeyReleased
+
+    private void txtSecurityQuestionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSecurityQuestionKeyReleased
+        validateField();
+    }//GEN-LAST:event_txtSecurityQuestionKeyReleased
+
+    private void txtAnswerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnswerKeyReleased
+        validateField();
+    }//GEN-LAST:event_txtAnswerKeyReleased
+
+    private void txtNewPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNewPasswordKeyReleased
+        validateField();
+    }//GEN-LAST:event_txtNewPasswordKeyReleased
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        clear();
+        
+    }//GEN-LAST:event_btnClearActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        String answer = txtAnswer.getText();
+        String newPassword = txtNewPassword.getText();
+        if (answer.equals(dbAnswer)) {
+            UserDao.update(email, newPassword);
+        }
+        else {
+            JOptionPane.showMessageDialog(null, "<html><b style =\"color:red\">Incorrect Answer</b></html>", "Message", JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        email = txtEmail.getText();
+        User user = null;
+        user = UserDao.getSecurityQuestion(email);
+        if (user == null) {
+            JOptionPane.showMessageDialog(null, "<html><b style =\"color:red\">Incorrect Email</b></html>", "Message", JOptionPane.ERROR_MESSAGE);
+
+        }
+        else {
+            btnSearch.setEnabled(false);
+            txtEmail.setEditable(false);
+            dbAnswer = user.getAnswer();
+            txtSecurityQuestion.setText(user.getSecurityQuestion());
+            validateField();
+        }
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnSignUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignUpActionPerformed
+        setVisible(false);
+        new Signup().setVisible(true);
+    }//GEN-LAST:event_btnSignUpActionPerformed
+
+    private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogInActionPerformed
+        setVisible(false);
+        new Login().setVisible(true);
+    }//GEN-LAST:event_btnLogInActionPerformed
 
     /**
      * @param args the command line arguments

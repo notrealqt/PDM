@@ -212,6 +212,11 @@ public class Signup extends javax.swing.JFrame {
         getContentPane().add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(842, 607, -1, -1));
 
         btnFP.setText("Forgot Password?");
+        btnFP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFPActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnFP, new org.netbeans.lib.awtextra.AbsoluteConstraints(617, 607, -1, -1));
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/firstpage_backgrounf.png"))); // NOI18N
@@ -271,6 +276,11 @@ public class Signup extends javax.swing.JFrame {
         setVisible(false);
         new Login().setVisible(true);
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnFPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFPActionPerformed
+        setVisible(false);
+        new ForgotPassword().setVisible(true);
+    }//GEN-LAST:event_btnFPActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {                                        
         int a = JOptionPane.showConfirmDialog(null, "Do you really want to Close the Application?", "Select", JOptionPane.YES_NO_OPTION);

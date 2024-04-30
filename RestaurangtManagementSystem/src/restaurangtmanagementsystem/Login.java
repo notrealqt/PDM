@@ -125,6 +125,11 @@ public class Login extends javax.swing.JFrame {
 
         btnFP.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         btnFP.setText("Forgot Password?");
+        btnFP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFPActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnFP, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 400, -1, -1));
 
         btnSignUp.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -168,6 +173,11 @@ public class Login extends javax.swing.JFrame {
         setVisible(false);
         new Signup().setVisible(true);
     }//GEN-LAST:event_btnSignUpActionPerformed
+
+    private void btnFPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFPActionPerformed
+       setVisible(false);
+       new ForgotPassword().setVisible(true);
+    }//GEN-LAST:event_btnFPActionPerformed
 
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {
     String email = txtEmail.getText();
