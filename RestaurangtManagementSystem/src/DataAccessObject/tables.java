@@ -16,13 +16,13 @@ public class tables {
                                     + "securityQuestion VARCHAR(200), "
                                     + "answer VARCHAR(200), "
                                     + "status VARCHAR(200))";
+            String categoryTable = "create table category(id int AUTO_INCREMENT primary key, name varchar(200) )";
             DbOperation.setDataOrDelete(userTableQuery, "User Table Created Successfully");
 
-            // Insert initial admin details
-            String adminDetailsQuery = "INSERT INTO user(name, email, mobileNumber, address, password, securityQuestion, answer, status) "
-                                     + "VALUES('Admin', 'admin@gmail.com', '1234567890', 'Vietnam', 'admin', 'What school?', 'IU', 'true')";
-            DbOperation.setDataOrDelete(adminDetailsQuery, "Admin Details Added Successfully");
-
+            //String adminDetailsQuery = "INSERT INTO user(name, email, mobileNumber, address, password, securityQuestion, answer, status) "
+            //                         + "VALUES('Admin', 'admin@gmail.com', '1234567890', 'Vietnam', 'admin', 'What school?', 'IU', 'true')";
+            //DbOperation.setDataOrDelete(adminDetailsQuery, "Admin Details Added Successfully");
+            DbOperation.setDataOrDelete(categoryTable, "Category Table Created Successfully");
             JOptionPane.showMessageDialog(null, "User table and Admin details initialized successfully.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error initializing user table and admin details: " + e.getMessage());
