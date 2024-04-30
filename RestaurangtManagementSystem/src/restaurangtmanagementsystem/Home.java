@@ -101,6 +101,11 @@ public class Home extends javax.swing.JFrame {
 
         btnNewProduct.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnNewProduct.setText("New Product");
+        btnNewProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNewProductActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnNewProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(538, 744, -1, -1));
 
         btnModifyProduct.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -136,6 +141,10 @@ public class Home extends javax.swing.JFrame {
     private void btnManageCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCatActionPerformed
         new ManageCategory().setVisible(true);
     }//GEN-LAST:event_btnManageCatActionPerformed
+
+    private void btnNewProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewProductActionPerformed
+        new AddNewProduct().setVisible(true);
+    }//GEN-LAST:event_btnNewProductActionPerformed
 
     /**
      * @param args the command line arguments
