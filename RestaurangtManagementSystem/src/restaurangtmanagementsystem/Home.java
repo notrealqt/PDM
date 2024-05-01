@@ -67,6 +67,11 @@ public class Home extends javax.swing.JFrame {
 
         btnView.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnView.setText("View Bill & Order Detailed");
+        btnView.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnViewActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(451, 0, -1, -1));
 
         btnPlaceOrder.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -110,6 +115,11 @@ public class Home extends javax.swing.JFrame {
 
         btnModifyProduct.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnModifyProduct.setText("Edit & Delete Product");
+        btnModifyProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnModifyProductActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnModifyProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(662, 744, -1, -1));
 
         btnVerifyUser.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -145,6 +155,14 @@ public class Home extends javax.swing.JFrame {
     private void btnNewProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewProductActionPerformed
         new AddNewProduct().setVisible(true);
     }//GEN-LAST:event_btnNewProductActionPerformed
+
+    private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
+        
+    }//GEN-LAST:event_btnViewActionPerformed
+
+    private void btnModifyProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyProductActionPerformed
+        new ModifyProduct().setVisible(true);
+    }//GEN-LAST:event_btnModifyProductActionPerformed
 
     /**
      * @param args the command line arguments

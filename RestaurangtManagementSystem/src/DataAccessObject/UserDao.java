@@ -50,4 +50,6 @@ public static User logIn(String email, String password) {
         String query = "update user set password = '"+newPassword+"' where email = '"+email+"'  ";
         DbOperation.setDataOrDelete(query, "Password changed successfully");
     }
+
+
 }

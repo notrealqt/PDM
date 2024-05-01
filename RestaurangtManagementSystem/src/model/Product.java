@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author VAN
+ * 
  */
 public class Product {
     private int id;
