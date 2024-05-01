@@ -76,6 +76,11 @@ public class Home extends javax.swing.JFrame {
 
         btnPlaceOrder.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnPlaceOrder.setText("Place Order");
+        btnPlaceOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPlaceOrderActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnPlaceOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 0, -1, -1));
 
         btnChangePassword.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -172,6 +177,11 @@ public class Home extends javax.swing.JFrame {
     private void btnVerifyUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerifyUserActionPerformed
         new VerifyUser().setVisible(true);
     }//GEN-LAST:event_btnVerifyUserActionPerformed
+
+    private void btnPlaceOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaceOrderActionPerformed
+        setVisible(false);
+        new PlaceOrder(email).setVisible(true);
+    }//GEN-LAST:event_btnPlaceOrderActionPerformed
 
     /**
      * @param args the command line arguments
