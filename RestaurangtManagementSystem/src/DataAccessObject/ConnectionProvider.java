@@ -5,7 +5,7 @@ public class ConnectionProvider {
     public static Connection getCon() {
         try {
             String user = "root";
-            String password = "01102000";
+            String password = "VLNVLTT112702t18@";
             String url = "jdbc:mysql://localhost:3306/rms";
             Connection con = DriverManager.getConnection(url, user, password);
             return con;
