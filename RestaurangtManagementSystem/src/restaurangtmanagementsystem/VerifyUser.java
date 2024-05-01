@@ -4,6 +4,15 @@
  */
 package restaurangtmanagementsystem;
 
+import java.util.*;
+
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+import DataAccessObject.UserDao;
+import model.User;
+
 /**
  *
  * @author USER
@@ -17,6 +26,20 @@ public class VerifyUser extends javax.swing.JFrame {
         initComponents();
     }
 
+    public void getAllRecords(String email) {
+        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+        dtm.setRowCount(0);
+        ArrayList<User> list = UserDao.getAllRecords(email);
+        Iterator<User> itr = list.iterator();
+        while(itr.hasNext()) {
+            User userObj = itr.next();
+            String admin = "admin@gmail.com";
+            if (!userObj.getEmail().equals(admin)) {
+                dtm.addRow(new Object[] {userObj.getId(), userObj.getName(), userObj.getEmail(), userObj.getMobileNumber(), userObj.getAddress(), userObj.getSecurityQuestion(), userObj.getStatus()});
+            
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,31 +50,33 @@ public class VerifyUser extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        btnExit = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtEmail = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        btnExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Verify Users");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
 
-        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close.png"))); // NOI18N
-        btnExit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExitActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1857, 6, 35, 36));
-
         jLabel2.setText("Search");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(169, 128, -1, -1));
+
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtEmailKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 125, 348, -1));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -62,22 +87,63 @@ public class VerifyUser extends javax.swing.JFrame {
                 "ID", "Name", "Email", "Mobile Number", "Address", "Security Question", "Status"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(58, 165, 1230, -1));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 1230, -1));
 
         jLabel3.setText("\"Click on row to change status\"");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(407, 610, -1, -1));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/full-page-background.jpg"))); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close.png"))); // NOI18N
+        btnExit.setText("X");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnExit, new org.netbeans.lib.awtextra.AbsoluteConstraints(1290, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        getAllRecords("");
+    }//GEN-LAST:event_formComponentShown
+
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
-        // TODO add your handling code here:
+        setVisible(false);
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void txtEmailKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyReleased
+        String email = txtEmail.getText();
+        getAllRecords(email);
+    }//GEN-LAST:event_txtEmailKeyReleased
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        int index = jTable1.getSelectedRow();
+        TableModel model = jTable1.getModel();
+        String email = model.getValueAt(index, 2).toString();
+        String status = model.getValueAt(index , 6).toString();
+        if (status.equals("true")) {
+            status = "false";
+        }
+        else 
+            status = "true";
+        
+        int a = JOptionPane.showConfirmDialog(null, "Do you want to change status of "+email+"", "Select", JOptionPane.YES_NO_OPTION);
+        if (a == 0 ) {
+            UserDao.changeStatus(email, status);
+            setVisible(false);
+            new VerifyUser().setVisible(true);
+            
+        }
+
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -119,7 +185,6 @@ public class VerifyUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtEmail;
