@@ -6,10 +6,12 @@ package DataAccessObject;
 
 import javax.swing.JOptionPane;
 import java.sql.*;
+import java.util.ArrayList;
+
 import model.Bill;
 /**
  *
- * @author VAN
+ * 
  */
 public class BillDao {
     public static String getID(){
@@ -31,4 +33,57 @@ public class BillDao {
         String query = "INSERT INTO bill (id, name, mobileNumber, email, date, total, createdBy) VALUES ('" + bill.getId() + "', '" + bill.getName() + "', '" + bill.getMobileNumber() + "', '" + bill.getEmail() + "', '" + bill.getDate() + "', '" + bill.getTotal() + "', '" + bill.getCreatedBy() + "')";
         DbOperation.setDataOrDelete(query, "Bill Detail Added Successfully");
     }
+
+    public static ArrayList<Bill> getAllRecordsByInc (String date) {
+        ArrayList<Bill> arrList = new ArrayList<>();
+        try {
+            ResultSet rs = DbOperation.getData("select * from bill where date like '%"+date+"%' ");
+            while (rs.next()) {
+                Bill bill = new Bill();
+                bill.setId(rs.getInt("id"));
+                bill.setName(rs.getString("name"));
+                bill.setMobileNumber(rs.getString("mobileNumber"));
+                bill.setEmail(rs.getString("email"));
+                bill.setDate(rs.getString("date"));
+                bill.setTotal(rs.getString("total"));
+                bill.setCreatedBy(rs.getString("createdBy"));
+                arrList.add(bill);
+
+            }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+        return arrList;
+
+
+    }
+
+    public static ArrayList<Bill> getAllRecordsByDesc (String date) {
+        ArrayList<Bill> arrList = new ArrayList<>();
+        try {
+            ResultSet rs = DbOperation.getData("select * from bill where date like '%"+date+"%' order by id DESC");
+            while (rs.next()) {
+                Bill bill = new Bill();
+                bill.setId(rs.getInt("id"));
+                bill.setName(rs.getString("name"));
+                bill.setMobileNumber(rs.getString("mobileNumber"));
+                bill.setEmail(rs.getString("email"));
+                bill.setDate(rs.getString("date"));
+                bill.setTotal(rs.getString("total"));
+                bill.setCreatedBy(rs.getString("createdBy"));
+                arrList.add(bill);
+
+            }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+        return arrList;
+
+
+    }
+    
 }

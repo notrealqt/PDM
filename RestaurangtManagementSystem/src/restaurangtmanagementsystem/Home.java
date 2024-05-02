@@ -167,7 +167,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNewProductActionPerformed
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
-        
+        new ViewOrderDetail().setVisible(true);
     }//GEN-LAST:event_btnViewActionPerformed
 
     private void btnModifyProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModifyProductActionPerformed
