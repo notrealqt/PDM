@@ -4,6 +4,12 @@
  */
 package restaurangtmanagementsystem;
 
+import DataAccessObject.ConnectionProvider;
+import DataAccessObject.tables;
+import java.sql.Connection;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author USER
@@ -14,8 +20,20 @@ public class RestaurangtManagementSystem {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Login login = new Login();
-        login.setVisible(true);
+        adminExists(args);
     }
-    
+     private static void adminExists(String[] args) {
+        try {
+            Connection con = ConnectionProvider.getCon();
+            if (con != null) {
+                Login login = new Login();
+                login.setVisible(true);
+            } else {
+                tables.main(args);
+                Login login = new Login();
+                login.setVisible(true);
+            }
+        } catch (Exception e) {
+        }
+    }
 }
