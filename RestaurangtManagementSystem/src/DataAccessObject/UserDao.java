@@ -97,4 +97,25 @@ public static User logIn(String email, String password) {
         }
 
     }
+
+    public static void ChangeSecurityQuestion(String email, String password, String securityQuestion, String answer) {
+        try {
+            ResultSet rs = DbOperation.getData("select * from user where email = '"+email+"' and password = '"+password+"'  ");
+            if (rs.next()) {
+                update(email, securityQuestion, answer);
+            }   
+            else {
+                JOptionPane.showMessageDialog(null, "Password is wrong");
+            }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
+    }
+
+    public static void update(String email, String securityQuestion, String answer) {
+        String query = "update user set securityQuestion = '"+securityQuestion+"', answer = '"+answer+"' where email = '"+email+"' ";
+        DbOperation.setDataOrDelete(query, "Security Question Changed Successfully");
+    }
 }

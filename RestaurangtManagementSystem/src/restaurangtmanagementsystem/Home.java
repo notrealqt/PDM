@@ -94,6 +94,11 @@ public class Home extends javax.swing.JFrame {
 
         btnChangeSQ.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
         btnChangeSQ.setText("Change Security Question");
+        btnChangeSQ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangeSQActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnChangeSQ, new org.netbeans.lib.awtextra.AbsoluteConstraints(821, 0, -1, -1));
 
         btnExit.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
@@ -191,6 +196,10 @@ public class Home extends javax.swing.JFrame {
     private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed
         new ChangePassword(email).setVisible(true);
     }//GEN-LAST:event_btnChangePasswordActionPerformed
+
+    private void btnChangeSQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangeSQActionPerformed
+        new ChangeSecurityQuestion(email).setVisible(true);
+    }//GEN-LAST:event_btnChangeSQActionPerformed
 
     /**
      * @param args the command line arguments
