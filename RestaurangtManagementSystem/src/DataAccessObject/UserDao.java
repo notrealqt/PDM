@@ -3,6 +3,7 @@ package DataAccessObject;
 import java.sql.*;
 import java.util.ArrayList;
 
+import javax.naming.spi.DirStateFactory.Result;
 import javax.swing.JOptionPane;
 
 import model.User;
@@ -79,5 +80,21 @@ public static User logIn(String email, String password) {
     public static void changeStatus(String email, String status) {
         String query = "update user set status = '"+status+"' where email = '"+email+"' ";
         DbOperation.setDataOrDelete(query, "Status Changed Successfully");
+    }
+
+    public static void ChangePassword( String email, String oldPassword, String newPassword) {
+        try {
+            ResultSet rs = DbOperation.getData("select * from user where email = '"+email+"' and password = '"+oldPassword+"' ");
+            if (rs.next()) {
+                update(email, newPassword);
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Old password is wrong");
+            }
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+
     }
 }
