@@ -395,34 +395,34 @@ public class PlaceOrder extends javax.swing.JFrame {
             doc.open();
             Paragraph restaurantName = new Paragraph("                                                               Restaurant Management System\n");
             doc.add(restaurantName);
-            Paragraph startLine = new Paragraph("***************************************************************************************");
+            Paragraph startLine = new Paragraph("****************************************************************************************************************");
             doc.add(startLine);
-            Paragraph para3 = new Paragraph("\nBill ID:" + billID + "\nCustomer Name" + customerName + "Total Paid: " + GrandTotal);
+            Paragraph para3 = new Paragraph("\nBill ID:" + billID + "\nCustomer Name: " + customerName + "\nTotal Paid: " + GrandTotal);
             doc.add(para3);
             doc.add(startLine);
-            System.out.print(jTable2.getColumnCount());
-            int numColumns = jTable2.getColumnCount(); // Get the number of columns in jTable2
-        PdfPTable tb1 = new PdfPTable(numColumns); // Create a table with the same number of columns as jTable2
+            PdfPTable tb1 = new PdfPTable(4);
+            tb1.addCell("Name");
+            tb1.addCell("Price");
+            tb1.addCell("Quantity");
+            tb1.addCell("Total");
 
         // Add column headers from jTable2 to PdfPTable
-        for (int i = 0; i < numColumns; i++) {
-            tb1.addCell(jTable2.getColumnName(i));
-        }
-
-        // Add data rows from jTable2 to PdfPTable
         for (int i = 0; i < jTable2.getRowCount(); i++) {
-            for (int j = 0; j < numColumns; j++) {
-                Object value = jTable2.getValueAt(i, j);
-                String cellValue = value != null ? value.toString() : ""; // Convert value to string, or use an empty string if value is null
-                tb1.addCell(cellValue);
-            }
-        
+            String n = jTable2.getValueAt(i, 0).toString(); // Name column
+            String d = jTable2.getValueAt(i, 1).toString(); // Price column
+            String r = jTable2.getValueAt(i, 2).toString(); // Quantity column
+            String q = jTable2.getValueAt(i, 3).toString(); // Total column
+            tb1.addCell(n);
+            tb1.addCell(d);
+            tb1.addCell(r);
+            tb1.addCell(q);
+        }
             doc.add(tb1);
             doc.add(startLine);
             Paragraph thanksMes = new Paragraph("Thank you for purchase. Please visit again!!!");
             doc.add(thanksMes);
             OpenPdf.openById(String.valueOf(billID));
-        }}
+        }
         catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
