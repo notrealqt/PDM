@@ -57,6 +57,7 @@ public class ModifyProduct extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
+        lbId = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -74,7 +75,6 @@ public class ModifyProduct extends javax.swing.JFrame {
 
         btnExit.setBackground(new java.awt.Color(255, 0, 0));
         btnExit.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close.png"))); // NOI18N
         btnExit.setText("X");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,6 +169,11 @@ public class ModifyProduct extends javax.swing.JFrame {
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-background-image.png"))); // NOI18N
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, -1, -1));
+
+        lbId.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lbId.setForeground(new java.awt.Color(255, 255, 255));
+        lbId.setText("lbID");
+        getContentPane().add(lbId, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 70, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -302,6 +307,7 @@ public class ModifyProduct extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lbId;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables

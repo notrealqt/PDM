@@ -253,9 +253,9 @@ public class Signup extends javax.swing.JFrame {
         user.setEmail(txtEmail.getText());
         user.setMobileNumber(txtMobileNumber.getText());
         user.setAddress(txtAddress.getText());
-        user.setPassword(txtPassword.getText());
+        user.setPassword(txtAnswer.getText());
         user.setSecurityQuestion(txtSecurityQuestion.getText());
-        user.setAnswer(txtAnswer.getText());
+        user.setAnswer(txtPassword.getText());
         UserDao.save(user);
         clear();
 

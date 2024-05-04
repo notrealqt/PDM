@@ -9,6 +9,8 @@ import java.io.FileOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import model.*;
 
 public class PlaceOrder extends javax.swing.JFrame {
@@ -24,6 +26,13 @@ public class PlaceOrder extends javax.swing.JFrame {
      */
     public PlaceOrder() {
         initComponents();
+        txtProductName.setEditable(false);
+        txtProductPrice.setEditable(false);
+        txtProductTotal.setEditable(false);
+        btnAddToCart.setEnabled(false);
+        btnGenerateBillAndPrint.setEnabled(false);
+        JFormattedTextField tf = ((JSpinner.DefaultEditor) jSpinner1.getEditor()).getTextField();
+        tf.setEnabled(false);
     }
     
     public PlaceOrder(String email) {
@@ -32,10 +41,10 @@ public class PlaceOrder extends javax.swing.JFrame {
         txtProductPrice.setEditable(false);
         txtProductTotal.setEditable(false);
         btnAddToCart.setEnabled(false);
+        btnGenerateBillAndPrint.setEnabled(false);
         JFormattedTextField tf = ((JSpinner.DefaultEditor) jSpinner1.getEditor()).getTextField();
         tf.setEnabled(false);
         userEmail = email;
-        
     }
     
     public void productNameByCategory(String category){
@@ -115,6 +124,8 @@ public class PlaceOrder extends javax.swing.JFrame {
         btnAddToCart = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        lblGrandTotal = new javax.swing.JLabel();
         btnGenerateBillAndPrint = new javax.swing.JButton();
         jLabel16 = new javax.swing.JLabel();
 
@@ -129,13 +140,11 @@ public class PlaceOrder extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/place order.png"))); // NOI18N
         jLabel1.setText("Place Order");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, -1, -1));
 
         jButton1.setBackground(new java.awt.Color(255, 0, 0));
         jButton1.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/close.png"))); // NOI18N
         jButton1.setText("X");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -290,7 +299,6 @@ public class PlaceOrder extends javax.swing.JFrame {
         getContentPane().add(txtProductTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(1060, 240, 250, -1));
 
         btnClear.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/clear.png"))); // NOI18N
         btnClear.setText("Clear");
         btnClear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -300,7 +308,6 @@ public class PlaceOrder extends javax.swing.JFrame {
         getContentPane().add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 280, -1, -1));
 
         btnAddToCart.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        btnAddToCart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/add to cart.png"))); // NOI18N
         btnAddToCart.setText("Add To Cart");
         btnAddToCart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -327,8 +334,17 @@ public class PlaceOrder extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 320, 550, 370));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Grand total: USD.");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 720, -1, -1));
+
+        lblGrandTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblGrandTotal.setForeground(new java.awt.Color(255, 255, 255));
+        lblGrandTotal.setText("000");
+        getContentPane().add(lblGrandTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(880, 720, -1, -1));
+
         btnGenerateBillAndPrint.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
-        btnGenerateBillAndPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/generate bill & print.png"))); // NOI18N
         btnGenerateBillAndPrint.setText("Generate Bill and Print");
         btnGenerateBillAndPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -338,7 +354,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         getContentPane().add(btnGenerateBillAndPrint, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 710, -1, -1));
 
         jLabel16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-background-image.png"))); // NOI18N
-        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        getContentPane().add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(-50, 10, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -397,7 +413,7 @@ public class PlaceOrder extends javax.swing.JFrame {
             doc.add(restaurantName);
             Paragraph startLine = new Paragraph("****************************************************************************************************************");
             doc.add(startLine);
-            Paragraph para3 = new Paragraph("\nBill ID:" + billID + "\nCustomer Name: " + customerName + "\nTotal Paid: " + GrandTotal);
+            Paragraph para3 = new Paragraph("\nBill ID:" + billID + "\nCustomer Name: " + customerName);
             doc.add(para3);
             doc.add(startLine);
             PdfPTable tb1 = new PdfPTable(4);
@@ -419,6 +435,8 @@ public class PlaceOrder extends javax.swing.JFrame {
         }
             doc.add(tb1);
             doc.add(startLine);
+            Paragraph set = new Paragraph("Total: " + lblGrandTotal.getText() + " USD");
+            doc.add(set);
             Paragraph thanksMes = new Paragraph("Thank you for purchase. Please visit again!!!");
             doc.add(thanksMes);
             OpenPdf.openById(String.valueOf(billID));
@@ -439,7 +457,7 @@ public class PlaceOrder extends javax.swing.JFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         billID = Integer.parseInt(BillDao.getID());
-        jLabel3.setText(BillDao.getID());
+        lblGrandTotal.setText(BillDao.getID());
         
         ArrayList <Category> list = CategoryDao.getAllRecords();
         Iterator <Category> itr = list.iterator();
@@ -565,6 +583,7 @@ public class PlaceOrder extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -576,6 +595,7 @@ public class PlaceOrder extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
+    private javax.swing.JLabel lblGrandTotal;
     private javax.swing.JTextField txtCusEmail;
     private javax.swing.JTextField txtCusMobileNum;
     private javax.swing.JTextField txtCusName;

@@ -56,7 +56,7 @@ public class Home extends javax.swing.JFrame {
                 btnLogOutActionPerformed(evt);
             }
         });
-        getContentPane().add(btnLogOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 140, 120, -1));
+        getContentPane().add(btnLogOut, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 550, 120, -1));
 
         btnView.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnView.setText("View Bill & Order Detailed");
@@ -65,7 +65,7 @@ public class Home extends javax.swing.JFrame {
                 btnViewActionPerformed(evt);
             }
         });
-        getContentPane().add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, 310, -1));
+        getContentPane().add(btnView, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 300, 330, -1));
 
         btnPlaceOrder.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnPlaceOrder.setText("Place Order");
@@ -74,7 +74,7 @@ public class Home extends javax.swing.JFrame {
                 btnPlaceOrderActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPlaceOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, 160, -1));
+        getContentPane().add(btnPlaceOrder, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 220, 330, -1));
 
         btnChangePassword.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnChangePassword.setText("Change Password");
@@ -83,7 +83,7 @@ public class Home extends javax.swing.JFrame {
                 btnChangePasswordActionPerformed(evt);
             }
         });
-        getContentPane().add(btnChangePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 390, 220, -1));
+        getContentPane().add(btnChangePassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 390, 330, -1));
 
         btnChangeSQ.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnChangeSQ.setText("Change Security Question");
@@ -92,7 +92,7 @@ public class Home extends javax.swing.JFrame {
                 btnChangeSQActionPerformed(evt);
             }
         });
-        getContentPane().add(btnChangeSQ, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 470, 290, -1));
+        getContentPane().add(btnChangeSQ, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 470, 330, -1));
 
         btnExit.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnExit.setText("Exit");
@@ -110,7 +110,7 @@ public class Home extends javax.swing.JFrame {
                 btnManageCatActionPerformed(evt);
             }
         });
-        getContentPane().add(btnManageCat, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 220, -1, -1));
+        getContentPane().add(btnManageCat, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 220, 260, -1));
 
         btnNewProduct.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnNewProduct.setText("New Product");
@@ -119,7 +119,7 @@ public class Home extends javax.swing.JFrame {
                 btnNewProductActionPerformed(evt);
             }
         });
-        getContentPane().add(btnNewProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 300, -1, -1));
+        getContentPane().add(btnNewProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 300, 260, -1));
 
         btnModifyProduct.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
         btnModifyProduct.setText("Edit & Delete Product");
@@ -137,7 +137,7 @@ public class Home extends javax.swing.JFrame {
                 btnVerifyUserActionPerformed(evt);
             }
         });
-        getContentPane().add(btnVerifyUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 470, -1, -1));
+        getContentPane().add(btnVerifyUser, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 470, 260, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-background-image.png"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
