@@ -2,8 +2,6 @@ package DataAccessObject;
 
 import java.sql.*;
 import java.util.ArrayList;
-
-import javax.naming.spi.DirStateFactory.Result;
 import javax.swing.JOptionPane;
 
 import model.User;

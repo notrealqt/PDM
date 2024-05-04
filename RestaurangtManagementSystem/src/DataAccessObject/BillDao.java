@@ -1,18 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DataAccessObject;
 
 import javax.swing.JOptionPane;
 import java.sql.*;
 import java.util.ArrayList;
-
 import model.Bill;
-/**
- *
- * 
- */
+
 public class BillDao {
     public static String getID(){
         int id = 1;
@@ -54,10 +46,7 @@ public class BillDao {
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-
         return arrList;
-
-
     }
 
     public static ArrayList<Bill> getAllRecordsByDesc (String date) {
@@ -80,10 +69,7 @@ public class BillDao {
         catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
         }
-
         return arrList;
-
-
     }
     
 }

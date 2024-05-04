@@ -3,7 +3,7 @@ package DataAccessObject;
 import javax.swing.JOptionPane;
 
 public class tables {
-    public static void main(String[] args) {
+    public tables() {
         try {
             // Create user table
             String userTableQuery = "CREATE TABLE IF NOT EXISTS user("
@@ -16,13 +16,16 @@ public class tables {
                                     + "securityQuestion VARCHAR(200), "
                                     + "answer VARCHAR(200), "
                                     + "status VARCHAR(200))";
+                                    
             String categoryTable = "create table category(id int AUTO_INCREMENT primary key, name varchar(200) )";
-            String productTable = "create table product(id int AUTO_INCREMENT primary key, name varchar(200), category varchar(200), price varchar(200))";
-            DbOperation.setDataOrDelete(userTableQuery, "User Table Created Successfully");
+            String productTable = "create table product(id int AUTO_INCREMENT primary key, name varchar(200), category varchar(200), price varchar(200))";            
             String billTable = "create table bill(id int primary key, name varchar(200), mobileNumber varchar(200), email varchar(200), date varchar(50), total varchar(200), createdBy varchar(200))";
-            //String adminDetailsQuery = "INSERT INTO user(name, email, mobileNumber, address, password, securityQuestion, answer, status) "
-            //                         + "VALUES('Admin', 'admin@gmail.com', '1234567890', 'Vietnam', 'admin', 'What school?', 'IU', 'true')";
-            //DbOperation.setDataOrDelete(adminDetailsQuery, "Admin Details Added Successfully");
+            String adminDetailsQuery = "INSERT INTO user(name, email, mobileNumber, address, password, securityQuestion, answer, status) "
+                                     + "VALUES('Admin', 'admin@gmail.com', '1234567890', 'Vietnam', 'admin', 'What school?', 'IU', 'true')";
+            
+            
+            DbOperation.setDataOrDelete(userTableQuery, "User Table Created Successfully");
+            DbOperation.setDataOrDelete(adminDetailsQuery, "Admin Details Added Successfully");
             DbOperation.setDataOrDelete(categoryTable, "Category Table Created Successfully");
             DbOperation.setDataOrDelete(productTable, "Product Table Created Successfully");
             DbOperation.setDataOrDelete(billTable, "Bill Table Created Successfully");
