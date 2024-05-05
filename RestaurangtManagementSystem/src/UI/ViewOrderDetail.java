@@ -33,7 +33,7 @@ public class ViewOrderDetail extends javax.swing.JFrame {
             Iterator<Bill> itr = list.iterator();
             while (itr.hasNext()) {
                 Bill billObj = itr.next();
-                dtm.addRow(new Object[] {billObj.getId(), billObj.getName(), billObj.getMobileNumber(), billObj.getEmail(), billObj.getDate(), billObj.getTotal(), billObj.getCreatedBy()});
+                dtm.addRow(new Object[] {billObj.getId(), billObj.getName(), billObj.getMobileNumber(), billObj.getEmail(), billObj.getDate(), billObj.getTotal(), billObj.getSellerID()});
             
             }
         }
@@ -42,7 +42,7 @@ public class ViewOrderDetail extends javax.swing.JFrame {
             Iterator<Bill> itr = list.iterator();
             while (itr.hasNext()) {
                 Bill billObj = itr.next();
-                dtm.addRow(new Object[] {billObj.getId(), billObj.getName(), billObj.getMobileNumber(), billObj.getEmail(), billObj.getDate(), billObj.getTotal(), billObj.getCreatedBy()});
+                dtm.addRow(new Object[] {billObj.getId(), billObj.getName(), billObj.getMobileNumber(), billObj.getEmail(), billObj.getDate(), billObj.getTotal(), billObj.getSellerID()});
             
             }
         }

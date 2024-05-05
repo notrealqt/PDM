@@ -7,7 +7,7 @@ public class Bill {
     private String email;
     private String date;
     private String total;
-    private String createdBy;
+    private int sellerID;
 
     public int getId() {
         return id;
@@ -57,12 +57,12 @@ public class Bill {
         this.total = total;
     }
 
-    public String getCreatedBy() {
-        return createdBy;
+    public int getSellerID() {
+        return sellerID;
     }
 
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
+    public void setSellerID(int id) {
+        this.sellerID = id;
     }
     
 }

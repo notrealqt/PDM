@@ -21,6 +21,7 @@ public class PlaceOrder extends javax.swing.JFrame {
     public String EmailPattern = "^[a-zA-Z0-9]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z0-9]+$";
     public String mobileNumberPattern = "^[0-9]*$";
     public String userEmail;
+    public int SellerId;
     /**
      * Creates new form PlaceOrder
      */
@@ -35,7 +36,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         tf.setEnabled(false);
     }
     
-    public PlaceOrder(String email) {
+    public PlaceOrder(String email, int id) {
         initComponents();
         txtProductName.setEditable(false);
         txtProductPrice.setEditable(false);
@@ -45,6 +46,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         JFormattedTextField tf = ((JSpinner.DefaultEditor) jSpinner1.getEditor()).getTextField();
         tf.setEnabled(false);
         userEmail = email;
+        this.SellerId = id;
     }
     
     public void productNameByCategory(String category){
@@ -81,7 +83,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         String CustomerName = txtCusName.getText();
         String CustomerMobileNumber = txtCusMobileNum.getText();
         String CustomerEmail = txtCusEmail.getText();
-        if(!CustomerEmail.equals("") && CustomerMobileNumber.matches(mobileNumberPattern) && CustomerMobileNumber.length() == 10 && CustomerEmail.matches(EmailPattern) && GrandTotal > 0){
+        if(!(CustomerName).equals("") && !CustomerEmail.equals("") && CustomerMobileNumber.matches(mobileNumberPattern) && CustomerMobileNumber.length() == 10 && CustomerEmail.matches(EmailPattern) && GrandTotal > 0){
             btnGenerateBillAndPrint.setEnabled(true);
         }
         else{
@@ -400,7 +402,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         bill.setEmail(customerEmail);
         bill.setDate(todaydate);
         bill.setTotal(total);
-        bill.setCreatedBy(createdBy);
+        bill.setSellerID(SellerId);
         BillDao.save(bill);
         
         //Creating document
@@ -446,12 +448,12 @@ public class PlaceOrder extends javax.swing.JFrame {
         }
         doc.close();
         setVisible(false);
-        new PlaceOrder(createdBy).setVisible(true);
+        new PlaceOrder(createdBy, SellerId).setVisible(true);
     }//GEN-LAST:event_btnGenerateBillAndPrintActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
-        new Home(userEmail).setVisible(true);
+        new Home(userEmail, SellerId).setVisible(true);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

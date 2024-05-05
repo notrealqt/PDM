@@ -8,13 +8,15 @@ public class Home extends javax.swing.JFrame {
     /**
      * Creates new form Home
      */
+    public int SellerId;
     public Home() {
         initComponents();
     }
     
-    public Home(String userEmail) {
+    public Home(String userEmail, int id) {
         initComponents();
         this.email = userEmail;
+        this.SellerId = id;
         if (!email.equals("admin@gmail.com")) {
             btnManageCat.setVisible(false);
             btnModifyProduct.setVisible(false);
@@ -182,7 +184,7 @@ public class Home extends javax.swing.JFrame {
 
     private void btnPlaceOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPlaceOrderActionPerformed
         setVisible(false);
-        new PlaceOrder(email).setVisible(true);
+        new PlaceOrder(email, SellerId).setVisible(true);
     }//GEN-LAST:event_btnPlaceOrderActionPerformed
 
     private void btnChangePasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePasswordActionPerformed

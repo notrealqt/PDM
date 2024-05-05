@@ -22,7 +22,7 @@ public class BillDao {
     }
     
     public static void save(Bill bill){
-        String query = "INSERT INTO bill (id, name, mobileNumber, email, date, total, createdBy) VALUES ('" + bill.getId() + "', '" + bill.getName() + "', '" + bill.getMobileNumber() + "', '" + bill.getEmail() + "', '" + bill.getDate() + "', '" + bill.getTotal() + "', '" + bill.getCreatedBy() + "')";
+        String query = "INSERT INTO bill (id, name, mobileNumber, email, date, total, SellerID) VALUES ('" + bill.getId() + "', '" + bill.getName() + "', '" + bill.getMobileNumber() + "', '" + bill.getEmail() + "', '" + bill.getDate() + "', '" + bill.getTotal() + "', '" + bill.getSellerID() + "')";
         DbOperation.setDataOrDelete(query, "Bill Detail Added Successfully");
     }
 
@@ -38,7 +38,7 @@ public class BillDao {
                 bill.setEmail(rs.getString("email"));
                 bill.setDate(rs.getString("date"));
                 bill.setTotal(rs.getString("total"));
-                bill.setCreatedBy(rs.getString("createdBy"));
+                bill.setSellerID(rs.getInt("SellerId"));
                 arrList.add(bill);
 
             }
@@ -61,7 +61,7 @@ public class BillDao {
                 bill.setEmail(rs.getString("email"));
                 bill.setDate(rs.getString("date"));
                 bill.setTotal(rs.getString("total"));
-                bill.setCreatedBy(rs.getString("createdBy"));
+                bill.setSellerID(rs.getInt("SellerId"));
                 arrList.add(bill);
 
             }

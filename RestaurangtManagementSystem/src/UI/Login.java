@@ -1,5 +1,6 @@
 package UI;
 
+import DataAccessObject.DbOperation;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -179,7 +180,7 @@ public class Login extends javax.swing.JFrame {
     private void btnLogInActionPerformed(java.awt.event.ActionEvent evt) {
     String email = txtEmail.getText();
     String password = txtPassword.getText();
-
+    int SellerId = DbOperation.getIdFromEmailAndPassword(email, password);
     User user = UserDao.logIn(email, password);
     if (user == null) {
         System.out.println("User is null. Email: " + email + ", Password: " + password);
@@ -192,7 +193,7 @@ public class Login extends javax.swing.JFrame {
         } else if (user.getStatus().equals("true")) {
             System.out.println("User logged in successfully. Email: " + email);
             setVisible(false);
-            new Home(email).setVisible(true);
+            new Home(email, SellerId).setVisible(true);
         }
     }
 }

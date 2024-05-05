@@ -29,4 +29,21 @@ public class DbOperation {
             return null;
         }
     }
+    
+    public static int getIdFromEmailAndPassword(String email, String password) {
+    String getIdQuery = "SELECT id FROM user WHERE email = ? AND password = ?";
+    try {
+        Connection con = ConnectionProvider.getCon();
+        PreparedStatement ps = con.prepareStatement(getIdQuery);
+        ps.setString(1, email);
+        ps.setString(2, password);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            return rs.getInt("id");
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+    return -1; // Return -1 if no user found or in case of error
+}
 }
