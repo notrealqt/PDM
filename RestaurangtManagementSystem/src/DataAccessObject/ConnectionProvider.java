@@ -1,6 +1,6 @@
 package DataAccessObject;
 import java.sql.*;
-
+//Change both password in getcon and getCon_initial
 public class ConnectionProvider {
     public static Connection getCon() {
         try {
