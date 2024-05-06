@@ -25,7 +25,7 @@ public class tables {
             String billTable = "create table bill(id int primary key, name varchar(200), mobileNumber varchar(200), email varchar(200), date varchar(50), total varchar(200),SellerId INT, FOREIGN KEY (SellerId) REFERENCES user(id))";
             String Bill_ProductTable = "create table Bill_Product(BillID INT, FOREIGN KEY (BillID) REFERENCES bill(id), ProductID INT, FOREIGN KEY (ProductID) REFERENCES product(id))";
             
-            DbOperation.setDataOrDelete(Bill_ProductTable, "Bill_Product Table Added Successfully");
+           
             DbOperation.setDataOrDelete(userTableQuery, "User Table Added Successfully");
             DbOperation.setDataOrDelete(categoryTable, "Category Table Created Successfully");
             DbOperation.setDataOrDelete(productTable, "Product Table Created Successfully");
@@ -33,6 +33,7 @@ public class tables {
             String adminDetailsQuery = "INSERT INTO user(name, email, mobileNumber, address, password, securityQuestion, answer, status) "
                                      + "VALUES('Admin', 'admin@gmail.com', '1234567890', 'Vietnam', 'admin', 'What school?', 'IU', 'true')";
             DbOperation.setDataOrDelete(adminDetailsQuery, "Admin Details Added Successfully");
+             DbOperation.setDataOrDelete(Bill_ProductTable, "Bill_Product Table Added Successfully");
             JOptionPane.showMessageDialog(null, "User table and Admin details initialized successfully.");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error initializing user table and admin details: " + e.getMessage());
