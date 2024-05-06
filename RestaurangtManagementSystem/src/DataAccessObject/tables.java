@@ -10,7 +10,7 @@ public class tables {
             Connection con1 = ConnectionProvider.getCon_initial();
             Statement st = con1.createStatement();
             st.executeUpdate("CREATE SCHEMA rms");
-            //Connection con1 = ConnectionProvider.getCon_initial();
+            //Connection con1 = ConnectionProvider.getCon();
             //Statement st = con1.createStatement();
             //st.executeUpdate("DROP DATABASE IF EXISTS rms");
             //st.executeUpdate("CREATE SCHEMA rms");
@@ -40,7 +40,7 @@ public class tables {
             String categoryTable = "create table category(id int AUTO_INCREMENT primary key, name varchar(200) )";
             String productTable = "create table product(id int AUTO_INCREMENT primary key, name varchar(200), category varchar(200), price DECIMAL(10, 2), UNIQUE(name, category))";            
             String billTable = "create table bill(id int primary key, name varchar(200), mobileNumber varchar(200), email varchar(200), date varchar(50), total varchar(200),SellerId INT, FOREIGN KEY (SellerId) REFERENCES user(id))";
-            String Bill_ProductTable = "create table Bill_Product(BillID INT, FOREIGN KEY (BillID) REFERENCES bill(id), ProductID INT, FOREIGN KEY (ProductID) REFERENCES product(id))";
+            String Bill_ProductTable = "create table Bill_Product(BillID INT, FOREIGN KEY (BillID) REFERENCES bill(id), ProductID INT, FOREIGN KEY (ProductID) REFERENCES product(id))ON DELETE NO ACTION";
             
             DbOperation.setDataOrDelete(userTableQuery, "User Table Added Successfully");
             DbOperation.setDataOrDelete(categoryTable, "Category Table Created Successfully");

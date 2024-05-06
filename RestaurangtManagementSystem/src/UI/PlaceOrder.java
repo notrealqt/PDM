@@ -491,7 +491,7 @@ public class PlaceOrder extends javax.swing.JFrame {
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         billID = Integer.parseInt(BillDao.getID());
-        lblGrandTotal.setText(BillDao.getID());
+        lblGrandTotal.setText("0");
         
         ArrayList <Category> list = CategoryDao.getAllRecords();
         Iterator <Category> itr = list.iterator();

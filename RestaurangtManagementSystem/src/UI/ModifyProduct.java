@@ -107,12 +107,7 @@ public class ModifyProduct extends javax.swing.JFrame {
         getContentPane().add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 100, 342, -1));
 
         ComboCat.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        ComboCat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ComboCatActionPerformed(evt);
-            }
-        });
-        getContentPane().add(ComboCat, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 342, -1));
+        getContentPane().add(ComboCat, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 340, -1));
 
         txtPrice.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         txtPrice.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -196,7 +191,7 @@ public class ModifyProduct extends javax.swing.JFrame {
         product.setId(id);
         product.setName(txtName.getText());
         product.setCategory((String) ComboCat.getSelectedItem());
-        product.setPrice(txtPrice.getText());
+        product.setPrice(Double.parseDouble(txtPrice.getText()));
 
         ProductDao.update(product);
         setVisible(false);

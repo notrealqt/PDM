@@ -38,7 +38,10 @@ public class ProductDao {
     }
 
     public static void delete(String id) {
-        String query = "delete from product were id = '"+id+"' ";
+        
+        //String query1 = "delete from bill_product where ProductID = '"+id+"'";
+        //DbOperation.setDataOrDelete(query1, "");
+        String query = "delete from product where id = '"+id+"'";
         DbOperation.setDataOrDelete(query, "Product Deleted Successfully");
     }
     
