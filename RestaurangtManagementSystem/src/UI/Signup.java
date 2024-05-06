@@ -73,7 +73,7 @@ public class Signup extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         btnFP = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
 
         jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/firstpage.jpg"))); // NOI18N
         jLabel9.setText("jLabel9");
@@ -240,8 +240,8 @@ public class Signup extends javax.swing.JFrame {
         jLabel10.setText("Pho-nomenal Burgers");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, -1, -1));
 
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CompressJPEG.online_1366x768-image.jpg"))); // NOI18N
-        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/CompressJPEG.online_1366x768-image.jpg"))); // NOI18N
+        getContentPane().add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -353,7 +353,7 @@ public class Signup extends javax.swing.JFrame {
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

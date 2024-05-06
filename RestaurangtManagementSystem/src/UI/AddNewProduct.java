@@ -125,8 +125,11 @@ public class AddNewProduct extends javax.swing.JFrame {
         });
         getContentPane().add(btnClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 260, -1, -1));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-background-image.png"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 390));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/small-page-background.png"))); // NOI18N
+        jLabel6.setMaximumSize(new java.awt.Dimension(700, 400));
+        jLabel6.setMinimumSize(new java.awt.Dimension(700, 400));
+        jLabel6.setPreferredSize(new java.awt.Dimension(700, 400));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 700, 400));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

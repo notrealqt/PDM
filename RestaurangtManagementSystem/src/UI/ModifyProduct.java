@@ -168,7 +168,7 @@ public class ModifyProduct extends javax.swing.JFrame {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 60, 690, 620));
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/home-background-image.png"))); // NOI18N
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, -1, -1));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -20, 1380, 810));
 
         lbId.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lbId.setForeground(new java.awt.Color(255, 255, 255));
@@ -223,25 +223,29 @@ public class ModifyProduct extends javax.swing.JFrame {
         lbId.setText(id);
         String name = model.getValueAt(index, 1).toString();
         txtName.setText(name);
-        String category = model.getValueAt(index,2 ).toString();
+        String category = model.getValueAt(index, 2).toString();
         String price = model.getValueAt(index, 3).toString();
         txtPrice.setText(price);
 
         btnUpdate.setEnabled(true);
         btnDelete.setEnabled(true);
 
-        ComboCat.removeAllItems();
-        ComboCat.addItem(category);
-
+        ComboCat.removeAllItems(); // Clear existing items
         ArrayList<Category> categoryList = CategoryDao.getAllRecords();
-        Iterator<Category> categoryItr = categoryList.iterator();
-        while (categoryItr.hasNext()) {
-            Category categoryObj = categoryItr.next();
-            if (!categoryObj.getName().equals(category)) {
-                ComboCat.addItem(categoryObj.getName());
-            }
+        System.out.println("Number of categories fetched: " + categoryList.size()); // Debugging statement
+        Iterator<Category> categoryIterator = categoryList.iterator();
+        while (categoryIterator.hasNext()) {
+            Category categoryObj = categoryIterator.next();
+            ComboCat.addItem(categoryObj.getName());
         }
 
+        // Set the selected category of the item being modified
+        String selectedCategory = model.getValueAt(index, 2).toString();
+        System.out.println("Selected Category: " + selectedCategory); // Debugging statement
+        ComboCat.setSelectedItem(selectedCategory);
+
+
+       
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
@@ -253,6 +257,8 @@ public class ModifyProduct extends javax.swing.JFrame {
             new ModifyProduct().setVisible(true);
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
         setVisible(false);
