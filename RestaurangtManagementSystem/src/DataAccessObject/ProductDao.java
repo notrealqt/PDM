@@ -20,7 +20,7 @@ public class ProductDao {
                 product.setId(rs.getInt("id"));
                 product.setName(rs.getString("name"));
                 product.setCategory(rs.getString("category"));
-                product.setPrice(rs.getString("price"));
+                product.setPrice(rs.getInt("price"));
                 arrList.add(product);
 
             }
@@ -81,7 +81,7 @@ public class ProductDao {
             while (rs.next()){
                 product.setName(rs.getString(2));
                 product.setCategory(rs.getString(3));
-                product.setPrice(rs.getString(4));
+                product.setPrice(rs.getDouble(4));
             }
         }
         catch(Exception e){

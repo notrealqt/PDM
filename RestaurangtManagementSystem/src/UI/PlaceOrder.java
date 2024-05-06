@@ -6,6 +6,7 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import common.OpenPdf;
 import java.io.FileOutputStream;
+import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.*;
@@ -15,9 +16,9 @@ import model.*;
 
 public class PlaceOrder extends javax.swing.JFrame {
     public int billID = 1;
-    public int GrandTotal = 0;
-    public int productPrice = 0;
-    public int productTotal = 0;
+    public double GrandTotal = 0;
+    public double productPrice = 0;
+    public double productTotal = 0;
     public String EmailPattern = "^[a-zA-Z0-9]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z0-9]+$";
     public String mobileNumberPattern = "^[0-9]*$";
     public String userEmail;
@@ -405,6 +406,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         bill.setSellerID(SellerId);
         BillDao.save(bill);
         
+        
         //Creating document
         String path = "E:\\";
         com.itextpdf.text.Document doc = new com.itextpdf.text.Document();
@@ -442,7 +444,27 @@ public class PlaceOrder extends javax.swing.JFrame {
             Paragraph thanksMes = new Paragraph("Thank you for purchase. Please visit again!!!");
             doc.add(thanksMes);
             OpenPdf.openById(String.valueOf(billID));
+            
+        //Bill_Product table
+        int product_Id;
+        for (int i = 0; i < jTable2.getRowCount(); i++) {
+            String Product_Name = jTable2.getValueAt(i, 0).toString(); // Name column
+            try {
+            ResultSet rs = DbOperation.getData("select id from product where name = '"+Product_Name+"'");
+                if(rs.next()) {
+                    product_Id = rs.getInt("id");
+                    Bill_Product bp = new Bill_Product();
+                    bp.setBillID(billID);
+                    bp.setProductID(product_Id);
+                    Bill_ProductDao.save(bp);
+               }
+            }
+            catch( Exception e) {
+            JOptionPane.showMessageDialog(null, e  );
+            }
         }
+        }
+        
         catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
@@ -483,11 +505,11 @@ public class PlaceOrder extends javax.swing.JFrame {
         String productName = model.getValueAt(index, 0).toString();
         Product product = ProductDao.getProductByname(productName);
         txtProductName.setText(product.getName());
-        txtProductPrice.setText(product.getPrice());
+        txtProductPrice.setText(String.valueOf(product.getPrice()));
         jSpinner1.setValue(1);
-        txtProductTotal.setText(product.getPrice());
-        productPrice = Integer.parseInt(product.getPrice());
-        productTotal = Integer.parseInt(product.getPrice());
+        txtProductTotal.setText(String.valueOf(product.getPrice()));
+        productPrice = product.getPrice();
+        productTotal = product.getPrice();
         btnAddToCart.setEnabled(true);
     }//GEN-LAST:event_jTable1MouseClicked
 
