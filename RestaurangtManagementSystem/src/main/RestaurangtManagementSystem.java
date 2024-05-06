@@ -26,9 +26,14 @@ public class RestaurangtManagementSystem {
      private static void adminExists(String[] args) {
         try {
             Connection con = ConnectionProvider.getCon();
+            if (con != null) {
+                Login login = new Login();
+                login.setVisible(true);
+            } else {
                 new tables();
                 Login login = new Login();
                 login.setVisible(true);
+            }
         } catch (Exception e) {
         }
     }

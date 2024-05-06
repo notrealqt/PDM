@@ -7,6 +7,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import common.OpenPdf;
 import java.io.FileOutputStream;
 import java.sql.ResultSet;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.*;
@@ -379,9 +380,17 @@ public class PlaceOrder extends javax.swing.JFrame {
         String price = txtProductPrice.getText();
         String quantity = String.valueOf(jSpinner1.getValue());
         DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
-        dtm.addRow(new Object[] {name, price, quantity, productTotal} );
+        dtm.addRow(new Object[] {name, price, quantity, productTotal});
+
+        // Update the grand total
         GrandTotal = GrandTotal + productTotal;
-        lblGrandTotal.setText(String.valueOf(GrandTotal));
+
+        // Format the grand total to display only two digits after the decimal point
+        DecimalFormat df = new DecimalFormat("#.##");
+        String formattedGrandTotal = df.format(GrandTotal);
+
+        // Set the formatted grand total to the label
+        lblGrandTotal.setText(formattedGrandTotal);
         
         clearProductField();
         validateField();
@@ -443,7 +452,7 @@ public class PlaceOrder extends javax.swing.JFrame {
             doc.add(set);
             Paragraph thanksMes = new Paragraph("Thank you for purchase. Please visit again!!!");
             doc.add(thanksMes);
-            OpenPdf.openById(String.valueOf(billID));
+            
             
         //Bill_Product table
         int product_Id;
@@ -463,6 +472,7 @@ public class PlaceOrder extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, e  );
             }
         }
+        OpenPdf.openById(String.valueOf(billID));
         }
         
         catch(Exception e){
@@ -550,8 +560,15 @@ public class PlaceOrder extends javax.swing.JFrame {
         if (a == 0){
             TableModel model = jTable2.getModel();
             String total = model.getValueAt(index, 3).toString();
-            GrandTotal = GrandTotal - Integer.parseInt(total);
-            lblGrandTotal.setText(String.valueOf(GrandTotal));
+            double totalAmount = Double.parseDouble(total);
+            GrandTotal -= totalAmount;
+
+            // Format the GrandTotal to display only two digits after the decimal point
+            DecimalFormat df = new DecimalFormat("#.##");
+            String formattedGrandTotal = df.format(GrandTotal);
+
+            // Set the formatted grand total to the label
+            lblGrandTotal.setText(formattedGrandTotal);
             ((DefaultTableModel) jTable2.getModel()).removeRow(index);
         }
     }//GEN-LAST:event_jTable2MouseClicked
