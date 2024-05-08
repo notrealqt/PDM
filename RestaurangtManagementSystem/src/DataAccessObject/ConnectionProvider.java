@@ -2,14 +2,13 @@ package DataAccessObject;
 import java.sql.*;
 //Change both password in getcon and getCon_initial
 public class ConnectionProvider {
+    static String user = "root";
+    static String url = "jdbc:mysql://localhost:3306/rms";
+    static String url2 = "jdbc:mysql://localhost:3306";
+    static String password = "VLNVLTT112702t18@";
+    //static String password = "01102000";
     public static Connection getCon() {
-        try {
-            String user = "root";
-            String url = "jdbc:mysql://localhost:3306/rms";
-            
-            //String password = "01102000";
-            String password = "VLNVLTT112702t18@";
-
+        try {            
             Connection con = DriverManager.getConnection(url, user, password);
             return con;
         }
@@ -18,14 +17,8 @@ public class ConnectionProvider {
         }
     }
     public static Connection getCon_initial() {
-        try {
-            String user = "root";
-            String url = "jdbc:mysql://localhost:3306";
-            
-            //String password = "01102000";
-            String password = "VLNVLTT112702t18@";
-
-            Connection con = DriverManager.getConnection(url, user, password);
+        try {            
+            Connection con = DriverManager.getConnection(url2, user, password);
             return con;
         }
         catch (Exception e) {
