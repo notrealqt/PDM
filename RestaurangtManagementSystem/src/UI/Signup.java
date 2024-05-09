@@ -246,7 +246,7 @@ public class Signup extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt){}
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         User user = new User();
         user.setName(txtName.getText());

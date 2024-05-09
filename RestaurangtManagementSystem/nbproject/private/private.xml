@@ -14,10 +14,10 @@
         <group>
             <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/main/RestaurangtManagementSystem.java</file>
             <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/UI/PlaceOrder.java</file>
-            <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/DataAccessObject/BillDao.java</file>
             <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/DataAccessObject/tables.java</file>
-            <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/UI/Home.java</file>
-            <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/DataAccessObject/ProductDao.java</file>
+            <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/UI/ModifyProduct.java</file>
+            <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/UI/AddNewProduct.java</file>
+            <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/UI/Signup.java</file>
         </group>
     </open-files>
 </project-private>

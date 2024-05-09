@@ -192,7 +192,7 @@ public class ModifyProduct extends javax.swing.JFrame {
         product.setName(txtName.getText());
         product.setCategory((String) ComboCat.getSelectedItem());
         product.setPrice(Double.parseDouble(txtPrice.getText()));
-
+        product.setCategory_ID(CategoryDao.getCategoryByname(product.getCategory()).getId());
         ProductDao.update(product);
         setVisible(false);
         new ModifyProduct().setVisible(true);
@@ -206,6 +206,8 @@ public class ModifyProduct extends javax.swing.JFrame {
         Iterator<Product> itr = list.iterator();
         while (itr.hasNext()) {
             Product productObj = itr.next();
+            double price = productObj.getPrice();
+            System.out.print(price + "\n");
             dtm.addRow(new Object[] {productObj.getId(),productObj.getName(),productObj.getCategory(), productObj.getPrice()});
             
         }

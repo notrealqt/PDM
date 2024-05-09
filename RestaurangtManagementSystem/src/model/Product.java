@@ -5,7 +5,16 @@ public class Product {
     private String name;
     private String category;
     private double price;
+    private int Category_ID;
 
+    public int getCategory_ID() {
+        return Category_ID;
+    }
+
+    public void setCategory_ID(int Category_ID) {
+        this.Category_ID = Category_ID;
+    }
+    
     public int getId() {
         return id;
     }

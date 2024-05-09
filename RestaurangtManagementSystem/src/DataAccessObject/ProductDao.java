@@ -8,9 +8,10 @@ import model.Product;
 public class ProductDao {
     
     public static void save(Product product){
-        String query = "insert into product (name, category, price) value('"+product.getName()+"', '"+product.getCategory()+"', '"+product.getPrice()+"')";
+        String query = "insert into product (name, category, price, Category_ID) value('"+product.getName()+"', '"+product.getCategory()+"', '"+product.getPrice()+"', '"+product.getCategory_ID()+"')";
         DbOperation.setDataOrDelete(query, "Product Added Successfully");
     }
+    
     public static ArrayList<Product> getAllRecords() {
         ArrayList<Product> arrList = new ArrayList<>();
         try {
@@ -20,7 +21,7 @@ public class ProductDao {
                 product.setId(rs.getInt("id"));
                 product.setName(rs.getString("name"));
                 product.setCategory(rs.getString("category"));
-                product.setPrice(rs.getInt("price"));
+                product.setPrice(rs.getDouble("price"));
                 arrList.add(product);
 
             }
@@ -33,7 +34,7 @@ public class ProductDao {
     }
 
     public static void update(Product product) {
-        String query = "update product set name = '"+product.getName()+"', category = '"+product.getCategory()+"', price = '"+product.getPrice()+"' where id = '"+product.getId()+"' ";
+        String query = "update product set name = '"+product.getName()+"', category = '"+product.getCategory()+"', price = '"+product.getPrice()+"', Category_ID = '"+product.getCategory_ID()+"' where id = '"+product.getId()+"' ";
         DbOperation.setDataOrDelete(query, "Product Update Successfully");
     }
 

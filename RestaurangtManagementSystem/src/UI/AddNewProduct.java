@@ -151,6 +151,7 @@ public class AddNewProduct extends javax.swing.JFrame {
         product.setName(txtName.getText());
         product.setCategory((String)txtCategory.getSelectedItem());
         product.setPrice( Double.parseDouble(txtPrice.getText()));
+        product.setCategory_ID(CategoryDao.getCategoryByname(product.getCategory()).getId());
         double x = product.getPrice();
         System.out.print(x);
         ProductDao.save(product);
