@@ -5,8 +5,8 @@ public class ConnectionProvider {
     static String user = "root";
     static String url = "jdbc:mysql://localhost:3306/rms";
     static String url2 = "jdbc:mysql://localhost:3306";
-    //static String password = "VLNVLTT112702t18@";
-    static String password = "01102000";
+    static String password = "VLNVLTT112702t18@";
+    //static String password = "01102000";
     public static Connection getCon() {
         try {            
             Connection con = DriverManager.getConnection(url, user, password);

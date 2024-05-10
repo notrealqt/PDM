@@ -23,7 +23,6 @@ public class PlaceOrder extends javax.swing.JFrame {
     public String emailPattern = "^[a-zA-Z0-9]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z0-9]+$";
     public String mobileNumberPattern = "^[0-9]*$";
     public String userEmail;
-    public String sellerName;
     public int sellerId;
     /**
      * Creates new form PlaceOrder
@@ -407,12 +406,13 @@ public class PlaceOrder extends javax.swing.JFrame {
         if (itemExists) {
             int existingQuantity = (Integer) jTable2.getValueAt(rowIndex, 2);
             double existingTotal = (Double) jTable2.getValueAt(rowIndex, 3);
-
+                    
             existingQuantity += quantity;
             jTable2.setValueAt(existingQuantity, rowIndex, 2);
 
             existingTotal += total;
-            jTable2.setValueAt(existingTotal, rowIndex, 3);
+            double roundedTotal = Math.round(existingTotal * 100.0) / 100.0;
+            jTable2.setValueAt(roundedTotal, rowIndex, 3);
         } else {
             // If the item does not exist, add it to the cart
             DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
@@ -449,12 +449,12 @@ public class PlaceOrder extends javax.swing.JFrame {
         bill.setEmail(customerEmail);
         bill.setDate(todaydate);
         bill.setTotal(total);
-        bill.setSellerID(user.getId());
+        bill.setSellerID(sellerId);
         BillDao.save(bill);
 
         // Creating document
-        // String path = "E:\\";
-        String path = "C:/Users/USER/Desktop/Projects/PDM";
+        String path = "E:\\";
+        //String path = "C:/Users/USER/Desktop/Projects/PDM";
         com.itextpdf.text.Document doc = new com.itextpdf.text.Document();
         try {
             PdfWriter.getInstance(doc, new FileOutputStream(path + "" + billID + ".pdf"));
@@ -565,7 +565,9 @@ public class PlaceOrder extends javax.swing.JFrame {
             quantity = 1;
         }
         productTotal = productPrice * quantity;
-        txtProductTotal.setText(String.valueOf(productTotal));
+        DecimalFormat df = new DecimalFormat("#.##");
+        String formattedproductTotal = df.format(productTotal);
+        txtProductTotal.setText(String.valueOf(formattedproductTotal));
     }//GEN-LAST:event_jSpinner1StateChanged
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed

@@ -6,8 +6,8 @@ import javax.swing.JOptionPane;
 public class OpenPdf {
     public static void openById(String Id) {
         try {
-            //String filePath = "E:\\" + Id + ".pdf";
-            String filePath = "C:/Users/USER/Desktop/Projects/PDM" + Id + ".pdf";
+            String filePath = "E:\\" + Id + ".pdf";
+            //String filePath = "C:/Users/USER/Desktop/Projects/PDM" + Id + ".pdf";
             File file = new File(filePath);
             if (file.exists()) {
                 Process p = Runtime.getRuntime().exec("cmd /c start \"\" \"" + filePath + "\"");
