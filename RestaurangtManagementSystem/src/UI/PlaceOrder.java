@@ -14,19 +14,17 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import model.*;
-import java.math.*;
-
 public class PlaceOrder extends javax.swing.JFrame {
     User user = new User();
-    BigDecimal GrandTotalBD = BigDecimal.ZERO;
     public int billID = 1;
-    public double GrandTotal = 0;
+    public double grandTotal = 0;
     public double productPrice = 0;
     public double productTotal = 0;
-    public String EmailPattern = "^[a-zA-Z0-9]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z0-9]+$";
+    public String emailPattern = "^[a-zA-Z0-9]+[@]+[a-zA-Z0-9]+[.]+[a-zA-Z0-9]+$";
     public String mobileNumberPattern = "^[0-9]*$";
     public String userEmail;
-    public int SellerId;
+    public String sellerName;
+    public int sellerId;
     /**
      * Creates new form PlaceOrder
      */
@@ -51,7 +49,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         JFormattedTextField tf = ((JSpinner.DefaultEditor) jSpinner1.getEditor()).getTextField();
         tf.setEnabled(false);
         userEmail = email;
-        this.SellerId = id;
+        this.sellerId = id;
     }
     
     public void productNameByCategory(String category){
@@ -84,17 +82,25 @@ public class PlaceOrder extends javax.swing.JFrame {
         btnAddToCart.setEnabled(false);
     }
     
-    public void validateField(){
-        String CustomerName = txtCusName.getText();
-        String CustomerMobileNumber = txtCusMobileNum.getText();
-        String CustomerEmail = txtCusEmail.getText();
-        if(!(CustomerName).equals("") && !CustomerEmail.equals("") && CustomerMobileNumber.matches(mobileNumberPattern) && CustomerMobileNumber.length() == 10 && CustomerEmail.matches(EmailPattern) && GrandTotal > 0){
+    public void validateField() {
+        String customerName = txtCusName.getText();
+        String customerMobileNumber = txtCusMobileNum.getText();
+        String customerEmail = txtCusEmail.getText();
+
+        boolean isNameNotEmpty = !customerName.equals("");
+        boolean isEmailNotEmpty = !customerEmail.equals("");
+        boolean isMobileNumberValid = customerMobileNumber.matches(mobileNumberPattern) && customerMobileNumber.length() == 10;
+        boolean isEmailValid = customerEmail.matches(emailPattern);
+        boolean isGrandTotalGreaterThanZero = grandTotal > 0;
+
+        if (isNameNotEmpty && isEmailNotEmpty && isMobileNumberValid && isEmailValid && isGrandTotalGreaterThanZero) {
             btnGenerateBillAndPrint.setEnabled(true);
-        }
-        else{
+        } else {
             btnGenerateBillAndPrint.setEnabled(false);
         }
     }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -380,14 +386,11 @@ public class PlaceOrder extends javax.swing.JFrame {
 
     private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
         String name = txtProductName.getText();
-        String price = txtProductPrice.getText();
+        String priceStr = txtProductPrice.getText();
+        double price = Double.parseDouble(priceStr);
         int quantity = (Integer) jSpinner1.getValue();
 
-        BigDecimal unitPrice = new BigDecimal(price);
-        BigDecimal quantityBD = new BigDecimal(quantity);
-        BigDecimal totalBD = unitPrice.multiply(quantityBD).setScale(2, RoundingMode.HALF_UP);
-
-        double total = totalBD.doubleValue();
+        double total = price * quantity;
 
         // Check if the item already exists in the cart
         boolean itemExists = false;
@@ -408,9 +411,7 @@ public class PlaceOrder extends javax.swing.JFrame {
             existingQuantity += quantity;
             jTable2.setValueAt(existingQuantity, rowIndex, 2);
 
-            BigDecimal existingTotalBD = BigDecimal.valueOf(existingTotal).setScale(2, RoundingMode.HALF_UP);
-            existingTotalBD = existingTotalBD.add(totalBD);
-            existingTotal = existingTotalBD.doubleValue();
+            existingTotal += total;
             jTable2.setValueAt(existingTotal, rowIndex, 3);
         } else {
             // If the item does not exist, add it to the cart
@@ -419,11 +420,11 @@ public class PlaceOrder extends javax.swing.JFrame {
         }
 
         // Update the grand total
-        GrandTotalBD = GrandTotalBD.add(totalBD).setScale(2, RoundingMode.HALF_UP);
+        grandTotal += total;
 
         // Format the grand total to display only two digits after the decimal point
         DecimalFormat df = new DecimalFormat("#.##");
-        String formattedGrandTotal = df.format(GrandTotalBD);
+        String formattedGrandTotal = df.format(grandTotal);
 
         // Set the formatted grand total to the label
         lblGrandTotal.setText(formattedGrandTotal);
@@ -439,7 +440,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
         String todaydate = dFormat.format(date);
-        String total = GrandTotalBD.toString(); // Use GrandTotalBD here
+        String total = String.valueOf(grandTotal); // Use grandTotal here
         String createdBy = userEmail;
         Bill bill = new Bill();
         bill.setId(billID);
@@ -448,17 +449,14 @@ public class PlaceOrder extends javax.swing.JFrame {
         bill.setEmail(customerEmail);
         bill.setDate(todaydate);
         bill.setTotal(total);
-        
-        bill.setSellerName(user.getName());
-        
+        bill.setSellerID(user.getId());
         BillDao.save(bill);
-        
-        
-        //Creating document
-        //String path = "E:\\";
+
+        // Creating document
+        // String path = "E:\\";
         String path = "C:/Users/USER/Desktop/Projects/PDM";
         com.itextpdf.text.Document doc = new com.itextpdf.text.Document();
-        try{
+        try {
             PdfWriter.getInstance(doc, new FileOutputStream(path + "" + billID + ".pdf"));
             doc.open();
             Paragraph restaurantName = new Paragraph("                                                               Restaurant Management System\n");
@@ -474,57 +472,55 @@ public class PlaceOrder extends javax.swing.JFrame {
             tb1.addCell("Quantity");
             tb1.addCell("Total");
 
-        // Add column headers from jTable2 to PdfPTable
-        for (int i = 0; i < jTable2.getRowCount(); i++) {
-            String n = jTable2.getValueAt(i, 0).toString(); // Name column
-            String d = jTable2.getValueAt(i, 1).toString(); // Price column
-            String r = jTable2.getValueAt(i, 2).toString(); // Quantity column
-            String q = jTable2.getValueAt(i, 3).toString(); // Total column
-            tb1.addCell(n);
-            tb1.addCell(d);
-            tb1.addCell(r);
-            tb1.addCell(q);
-        }
+            // Add column headers from jTable2 to PdfPTable
+            for (int i = 0; i < jTable2.getRowCount(); i++) {
+                String n = jTable2.getValueAt(i, 0).toString(); // Name column
+                String d = jTable2.getValueAt(i, 1).toString(); // Price column
+                String r = jTable2.getValueAt(i, 2).toString(); // Quantity column
+                String q = jTable2.getValueAt(i, 3).toString(); // Total column
+                tb1.addCell(n);
+                tb1.addCell(d);
+                tb1.addCell(r);
+                tb1.addCell(q);
+            }
             doc.add(tb1);
             doc.add(startLine);
             Paragraph set = new Paragraph("Total: " + lblGrandTotal.getText() + " USD");
             doc.add(set);
             Paragraph thanksMes = new Paragraph("Thank you for purchase. Please visit again!!!");
             doc.add(thanksMes);
-            
-            
-        //Bill_Product table
-        int product_Id;
-        for (int i = 0; i < jTable2.getRowCount(); i++) {
-            String Product_Name = jTable2.getValueAt(i, 0).toString(); // Name column
-            try {
-            ResultSet rs = DbOperation.getData("select id from product where name = '"+Product_Name+"'");
-                if(rs.next()) {
-                    product_Id = rs.getInt("id");
-                    Bill_Product bp = new Bill_Product();
-                    bp.setBillID(billID);
-                    bp.setProductID(product_Id);
-                    Bill_ProductDao.save(bp);
-               }
+
+            // Bill_Product table
+            int product_Id;
+            for (int i = 0; i < jTable2.getRowCount(); i++) {
+                String Product_Name = jTable2.getValueAt(i, 0).toString(); // Name column
+                try {
+                    ResultSet rs = DbOperation.getData("select id from product where name = '"+Product_Name+"'");
+                    if(rs.next()) {
+                        product_Id = rs.getInt("id");
+                        Bill_Product bp = new Bill_Product();
+                        bp.setBillID(billID);
+                        bp.setProductID(product_Id);
+                        Bill_ProductDao.save(bp);
+                   }
+                }
+                catch( Exception e) {
+                    JOptionPane.showMessageDialog(null, e  );
+                }
             }
-            catch( Exception e) {
-            JOptionPane.showMessageDialog(null, e  );
-            }
+            OpenPdf.openById(String.valueOf(billID));
         }
-        OpenPdf.openById(String.valueOf(billID));
-        }
-        
         catch(Exception e){
             JOptionPane.showMessageDialog(null, e);
         }
         doc.close();
         setVisible(false);
-        new PlaceOrder(createdBy, SellerId).setVisible(true);
+        new PlaceOrder(createdBy, sellerId).setVisible(true);
     }//GEN-LAST:event_btnGenerateBillAndPrintActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         setVisible(false);
-        new Home(userEmail, SellerId).setVisible(true);
+        new Home(userEmail, sellerId).setVisible(true);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -600,11 +596,11 @@ public class PlaceOrder extends javax.swing.JFrame {
             TableModel model = jTable2.getModel();
             String total = model.getValueAt(index, 3).toString();
             double totalAmount = Double.parseDouble(total);
-            GrandTotal -= totalAmount;
+            grandTotal -= totalAmount;
 
             // Format the GrandTotal to display only two digits after the decimal point
             DecimalFormat df = new DecimalFormat("#.##");
-            String formattedGrandTotal = df.format(GrandTotal);
+            String formattedGrandTotal = df.format(grandTotal);
 
             // Set the formatted grand total to the label
             lblGrandTotal.setText(formattedGrandTotal);

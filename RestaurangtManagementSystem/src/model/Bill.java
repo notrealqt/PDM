@@ -7,7 +7,7 @@ public class Bill {
     private String email;
     private String date;
     private String total;
-    private String sellerName;
+    private int sellerID;
 
     public int getId() {
         return id;
@@ -57,12 +57,12 @@ public class Bill {
         this.total = total;
     }
 
-    public String getSellerName() {
-        return sellerName;
+    public int getSellerID() {
+        return sellerID;
     }
 
-    public void setSellerName(String name) {
-        this.sellerName = name;
+    public void setSellerID(int id) {
+        this.sellerID = id;
     }
     
 }
