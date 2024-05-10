@@ -4,10 +4,6 @@
  */
 package model;
 
-/**
- *
- * @author VAN
- */
 public class Bill_Product {
     private int BillID;
     private int ProductID;

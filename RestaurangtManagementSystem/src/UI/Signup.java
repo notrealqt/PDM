@@ -21,10 +21,10 @@ public class Signup extends javax.swing.JFrame {
         txtName.setText("");
         txtEmail.setText("");
         txtMobileNumber.setText("");
-        txtAddress.setText("");
         txtSecurityQuestion.setText("");
-        txtAnswer.setText("");
+        txtAddress.setText("");
         txtPassword.setText("");
+        txtAnswer.setText("");
         btnSave.setEnabled(false);
         
     }
@@ -32,10 +32,10 @@ public class Signup extends javax.swing.JFrame {
         String name = txtName.getText();
         String email = txtEmail.getText();
         String mobileNumber = txtMobileNumber.getText();
-        String address = txtAddress.getText();
-        String password = txtPassword.getText();
-        String securityQuestion = txtSecurityQuestion.getText();
-        String answer = txtAnswer.getText();
+        String address = txtSecurityQuestion.getText();
+        String password = txtAnswer.getText();
+        String securityQuestion = txtAddress.getText();
+        String answer = txtPassword.getText();
 
         if (!name.equals("") && email.matches(emailPattern)
         && mobileNumber.matches(mobileNumberPattern) && mobileNumber.length() == 10
@@ -63,10 +63,10 @@ public class Signup extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         txtEmail = new javax.swing.JTextField();
         txtMobileNumber = new javax.swing.JTextField();
-        txtAddress = new javax.swing.JTextField();
-        txtPassword = new javax.swing.JPasswordField();
-        txtAnswer = new javax.swing.JPasswordField();
         txtSecurityQuestion = new javax.swing.JTextField();
+        txtAnswer = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
+        txtAddress = new javax.swing.JTextField();
         btnExit = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
@@ -158,21 +158,13 @@ public class Signup extends javax.swing.JFrame {
         });
         getContentPane().add(txtMobileNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 250, 297, -1));
 
-        txtAddress.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        txtAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtSecurityQuestion.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txtSecurityQuestion.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtAddressKeyReleased(evt);
+                txtSecurityQuestionKeyReleased(evt);
             }
         });
-        getContentPane().add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 370, 297, -1));
-
-        txtPassword.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtPasswordKeyReleased(evt);
-            }
-        });
-        getContentPane().add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 410, 297, -1));
+        getContentPane().add(txtSecurityQuestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 370, 297, -1));
 
         txtAnswer.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         txtAnswer.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -180,15 +172,23 @@ public class Signup extends javax.swing.JFrame {
                 txtAnswerKeyReleased(evt);
             }
         });
-        getContentPane().add(txtAnswer, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 330, 297, -1));
+        getContentPane().add(txtAnswer, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 410, 297, -1));
 
-        txtSecurityQuestion.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        txtSecurityQuestion.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtPassword.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtSecurityQuestionKeyReleased(evt);
+                txtPasswordKeyReleased(evt);
             }
         });
-        getContentPane().add(txtSecurityQuestion, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 290, 297, -1));
+        getContentPane().add(txtPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 330, 297, -1));
+
+        txtAddress.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
+        txtAddress.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAddressKeyReleased(evt);
+            }
+        });
+        getContentPane().add(txtAddress, new org.netbeans.lib.awtextra.AbsoluteConstraints(1030, 290, 297, -1));
 
         btnExit.setFont(new java.awt.Font("Times New Roman", 1, 20)); // NOI18N
         btnExit.setText("Exit");
@@ -253,9 +253,9 @@ public class Signup extends javax.swing.JFrame {
         user.setEmail(txtEmail.getText());
         user.setMobileNumber(txtMobileNumber.getText());
         user.setAddress(txtAddress.getText());
-        user.setPassword(txtAnswer.getText());
+        user.setPassword(txtPassword.getText());
         user.setSecurityQuestion(txtSecurityQuestion.getText());
-        user.setAnswer(txtPassword.getText());
+        user.setAnswer(txtAnswer.getText());
         UserDao.save(user);
         clear();
 
@@ -273,25 +273,25 @@ public class Signup extends javax.swing.JFrame {
         validateFields();
     }//GEN-LAST:event_txtEmailKeyReleased
 
-    private void txtSecurityQuestionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSecurityQuestionKeyReleased
+    private void txtAddressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAddressKeyReleased
         validateFields();
-    }//GEN-LAST:event_txtSecurityQuestionKeyReleased
+    }//GEN-LAST:event_txtAddressKeyReleased
 
     private void txtMobileNumberKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMobileNumberKeyReleased
         validateFields();
     }//GEN-LAST:event_txtMobileNumberKeyReleased
 
-    private void txtAnswerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnswerKeyReleased
-        validateFields();
-    }//GEN-LAST:event_txtAnswerKeyReleased
-
-    private void txtAddressKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAddressKeyReleased
-        validateFields();
-    }//GEN-LAST:event_txtAddressKeyReleased
-
     private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
         validateFields();
     }//GEN-LAST:event_txtPasswordKeyReleased
+
+    private void txtSecurityQuestionKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSecurityQuestionKeyReleased
+        validateFields();
+    }//GEN-LAST:event_txtSecurityQuestionKeyReleased
+
+    private void txtAnswerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAnswerKeyReleased
+        validateFields();
+    }//GEN-LAST:event_txtAnswerKeyReleased
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         setVisible(false);

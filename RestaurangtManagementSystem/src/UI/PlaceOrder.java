@@ -14,8 +14,10 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import model.*;
+import java.math.*;
 
 public class PlaceOrder extends javax.swing.JFrame {
+    BigDecimal GrandTotalBD = BigDecimal.ZERO;
     public int billID = 1;
     public double GrandTotal = 0;
     public double productPrice = 0;
@@ -378,20 +380,53 @@ public class PlaceOrder extends javax.swing.JFrame {
     private void btnAddToCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToCartActionPerformed
         String name = txtProductName.getText();
         String price = txtProductPrice.getText();
-        String quantity = String.valueOf(jSpinner1.getValue());
-        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
-        dtm.addRow(new Object[] {name, price, quantity, productTotal});
+        int quantity = (Integer) jSpinner1.getValue();
+
+        BigDecimal unitPrice = new BigDecimal(price);
+        BigDecimal quantityBD = new BigDecimal(quantity);
+        BigDecimal totalBD = unitPrice.multiply(quantityBD).setScale(2, RoundingMode.HALF_UP);
+
+        double total = totalBD.doubleValue();
+
+        // Check if the item already exists in the cart
+        boolean itemExists = false;
+        int rowIndex = -1;
+        for (int i = 0; i < jTable2.getRowCount(); i++) {
+            if (name.equals(jTable2.getValueAt(i, 0))) {
+                itemExists = true;
+                rowIndex = i;
+                break;
+            }
+        }
+
+        // If the item exists, update the quantity and total
+        if (itemExists) {
+            int existingQuantity = (Integer) jTable2.getValueAt(rowIndex, 2);
+            double existingTotal = (Double) jTable2.getValueAt(rowIndex, 3);
+
+            existingQuantity += quantity;
+            jTable2.setValueAt(existingQuantity, rowIndex, 2);
+
+            BigDecimal existingTotalBD = BigDecimal.valueOf(existingTotal).setScale(2, RoundingMode.HALF_UP);
+            existingTotalBD = existingTotalBD.add(totalBD);
+            existingTotal = existingTotalBD.doubleValue();
+            jTable2.setValueAt(existingTotal, rowIndex, 3);
+        } else {
+            // If the item does not exist, add it to the cart
+            DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+            dtm.addRow(new Object[]{name, price, quantity, total});
+        }
 
         // Update the grand total
-        GrandTotal = GrandTotal + productTotal;
+        GrandTotalBD = GrandTotalBD.add(totalBD).setScale(2, RoundingMode.HALF_UP);
 
         // Format the grand total to display only two digits after the decimal point
         DecimalFormat df = new DecimalFormat("#.##");
-        String formattedGrandTotal = df.format(GrandTotal);
+        String formattedGrandTotal = df.format(GrandTotalBD);
 
         // Set the formatted grand total to the label
         lblGrandTotal.setText(formattedGrandTotal);
-        
+
         clearProductField();
         validateField();
     }//GEN-LAST:event_btnAddToCartActionPerformed
@@ -403,7 +438,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
         String todaydate = dFormat.format(date);
-        String total = String.valueOf(GrandTotal);
+        String total = GrandTotalBD.toString(); // Use GrandTotalBD here
         String createdBy = userEmail;
         Bill bill = new Bill();
         bill.setId(billID);
@@ -417,7 +452,8 @@ public class PlaceOrder extends javax.swing.JFrame {
         
         
         //Creating document
-        String path = "E:\\";
+        //String path = "E:\\";
+        String path = "C:/Users/USER/Desktop/Projects/PDM";
         com.itextpdf.text.Document doc = new com.itextpdf.text.Document();
         try{
             PdfWriter.getInstance(doc, new FileOutputStream(path + "" + billID + ".pdf"));

@@ -23,30 +23,27 @@ public class ViewOrderDetail extends javax.swing.JFrame {
 
     }
 
-    public void tableDetails() {
-        String date = txtDate.getText();
-        String incDec = (String) jComboBox1.getSelectedItem();
-        DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
-        dtm.setRowCount(0);
-        if (incDec.equals("INC")) {
-            ArrayList<Bill> list = BillDao.getAllRecordsByInc(date);
-            Iterator<Bill> itr = list.iterator();
-            while (itr.hasNext()) {
-                Bill billObj = itr.next();
-                dtm.addRow(new Object[] {billObj.getId(), billObj.getName(), billObj.getMobileNumber(), billObj.getEmail(), billObj.getDate(), billObj.getTotal(), billObj.getSellerID()});
-            
-            }
-        }
-        else {
-            ArrayList<Bill> list = BillDao.getAllRecordsByDesc(date);
-            Iterator<Bill> itr = list.iterator();
-            while (itr.hasNext()) {
-                Bill billObj = itr.next();
-                dtm.addRow(new Object[] {billObj.getId(), billObj.getName(), billObj.getMobileNumber(), billObj.getEmail(), billObj.getDate(), billObj.getTotal(), billObj.getSellerID()});
-            
-            }
-        }
+public void tableDetails() {
+    String date = txtDate.getText();
+    String incDec = (String) jComboBox1.getSelectedItem();
+    DefaultTableModel dtm = (DefaultTableModel) jTable1.getModel();
+    dtm.setRowCount(0);
+    
+    ArrayList<Bill> list;
+    if (incDec.equals("INC")) {
+        list = BillDao.getAllRecordsByInc(date);
+    } else {
+        list = BillDao.getAllRecordsByDesc(date);
     }
+    
+    for (Bill billObj : list) {
+        double totalAmount = Double.parseDouble(billObj.getTotal());
+        String totalAmountFormatted = String.format("%.2f", totalAmount);
+        Object[] rowData = {billObj.getId(), billObj.getName(), billObj.getMobileNumber(), billObj.getEmail(), billObj.getDate(), totalAmountFormatted, billObj.getSellerID()};
+        dtm.addRow(rowData);
+    }
+}
+
 
     /**
      * This method is called from within the constructor to initialize the form.
