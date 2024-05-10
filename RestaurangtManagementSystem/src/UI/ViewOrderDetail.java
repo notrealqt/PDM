@@ -7,6 +7,7 @@ import DataAccessObject.BillDao;
 import common.OpenPdf;
 import model.Bill;
 import java.text.SimpleDateFormat;
+import model.User;
 
 public class ViewOrderDetail extends javax.swing.JFrame {
 
@@ -39,7 +40,8 @@ public void tableDetails() {
     for (Bill billObj : list) {
         double totalAmount = Double.parseDouble(billObj.getTotal());
         String totalAmountFormatted = String.format("%.2f", totalAmount);
-        Object[] rowData = {billObj.getId(), billObj.getName(), billObj.getMobileNumber(), billObj.getEmail(), billObj.getDate(), totalAmountFormatted, billObj.getSellerID()};
+        User user = new User();
+        Object[] rowData = {billObj.getId(), billObj.getName(), billObj.getMobileNumber(), billObj.getEmail(), billObj.getDate(), totalAmountFormatted, billObj.getSellerName()};
         dtm.addRow(rowData);
     }
 }

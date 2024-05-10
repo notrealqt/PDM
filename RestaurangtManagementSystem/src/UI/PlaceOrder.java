@@ -17,6 +17,7 @@ import model.*;
 import java.math.*;
 
 public class PlaceOrder extends javax.swing.JFrame {
+    User user = new User();
     BigDecimal GrandTotalBD = BigDecimal.ZERO;
     public int billID = 1;
     public double GrandTotal = 0;
@@ -447,7 +448,9 @@ public class PlaceOrder extends javax.swing.JFrame {
         bill.setEmail(customerEmail);
         bill.setDate(todaydate);
         bill.setTotal(total);
-        bill.setSellerID(SellerId);
+        
+        bill.setSellerName(user.getName());
+        
         BillDao.save(bill);
         
         
