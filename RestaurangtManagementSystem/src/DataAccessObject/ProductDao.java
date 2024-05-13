@@ -52,7 +52,11 @@ public class ProductDao {
             ResultSet rs = DbOperation.getData("select * from product where category = '"+category+"'");
             while (rs.next()){
                 Product product = new Product();
+                product.setId(rs.getInt("id"));
                 product.setName(rs.getString("name"));
+                product.setCategory(rs.getString("category"));
+                product.setPrice(rs.getDouble("price"));
+                product.setCategory_ID(rs.getInt("Category_ID"));
                 arrayList.add(product);
             }
         }
@@ -83,9 +87,11 @@ public class ProductDao {
         try{
             ResultSet rs = DbOperation.getData("select * from product where name = '"+name+"'");
             while (rs.next()){
+                product.setId(rs.getInt(1));
                 product.setName(rs.getString(2));
                 product.setCategory(rs.getString(3));
                 product.setPrice(rs.getDouble(4));
+                product.setCategory_ID(rs.getInt(5));
             }
         }
         catch(Exception e){

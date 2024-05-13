@@ -60,9 +60,9 @@ public class tables {
             // Insert admin details
             String adminDetailsQuery = "INSERT INTO rms.user(name, email, mobileNumber, address, password, securityQuestion, answer, status) "
                                      + "VALUES('Admin', 'admin@gmail.com', '1234567890', 'Vietnam', 'admin', 'What school?', 'IU', 'true')";
-                                     
+            String soldOutCategoryQuery = "INSERT INTO rms.category(name) VALUES ('Sold out')";                         
             DbOperation.setDataOrDelete(adminDetailsQuery, "Admin Details Added Successfully");
-
+            DbOperation.setDataOrDelete(soldOutCategoryQuery, "Category Added Successfully");
             // Create Bill_Product table
             DbOperation.setDataOrDelete(Bill_ProductTable, "Bill_Product Table Added Successfully");
 

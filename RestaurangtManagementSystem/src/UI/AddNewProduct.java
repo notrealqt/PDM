@@ -171,9 +171,11 @@ public class AddNewProduct extends javax.swing.JFrame {
         ArrayList<Category> list = CategoryDao.getAllRecords();
         Iterator <Category> itr = list.iterator();
         while (itr.hasNext()){
+            String soldout = "Sold out";
             Category CategoryObj = itr.next();
-            txtCategory.addItem(CategoryObj.getName());
-            
+            if(!CategoryObj.getName().equals(soldout)){
+                txtCategory.addItem(CategoryObj.getName());
+            }
         }
     }//GEN-LAST:event_formComponentShown
 

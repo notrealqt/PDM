@@ -555,7 +555,10 @@ public class PlaceOrder extends javax.swing.JFrame {
         txtProductTotal.setText(String.valueOf(product.getPrice()));
         productPrice = product.getPrice();
         productTotal = product.getPrice();
-        btnAddToCart.setEnabled(true);
+        Category Sold_out = CategoryDao.getCategoryByname("Sold out");
+        if(!(product.getCategory().equals(Sold_out.getName())) ){
+             btnAddToCart.setEnabled(true);
+        }
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void jSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinner1StateChanged

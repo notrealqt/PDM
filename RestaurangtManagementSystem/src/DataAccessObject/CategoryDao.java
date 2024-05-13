@@ -41,6 +41,7 @@ public class CategoryDao {
             ResultSet rs = DbOperation.getData("select id from category where name = '"+name+"'");
             while (rs.next()){
                 category.setId(rs.getInt(1));
+                category.setName(name);
             }
         }
         catch(Exception e){

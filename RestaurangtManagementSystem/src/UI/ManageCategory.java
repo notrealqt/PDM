@@ -8,7 +8,9 @@ import javax.swing.table.TableModel;
 import javax.swing.text.html.HTMLDocument.Iterator;
 import java.util.*;
 import DataAccessObject.CategoryDao;
+import DataAccessObject.ProductDao;
 import model.Category;
+import model.Product;
 
 public class ManageCategory extends javax.swing.JFrame {
 
@@ -166,7 +168,10 @@ public class ManageCategory extends javax.swing.JFrame {
         java.util.Iterator<Category> itr = list.iterator();
         while (itr.hasNext() ) {
             Category categoryObj = itr.next();
-            dtm.addRow(new Object[] {categoryObj.getId(), categoryObj.getName()});
+            String soldout = "Sold out";
+            if(!categoryObj.getName().equals(soldout)){
+                dtm.addRow(new Object[] {categoryObj.getId(), categoryObj.getName()});
+            }
         }
     }//GEN-LAST:event_formComponentShown
 
@@ -179,10 +184,20 @@ public class ManageCategory extends javax.swing.JFrame {
         int a = JOptionPane.showConfirmDialog(null, "Do you want to delete "+name+" category?", "Select", JOptionPane.YES_NO_OPTION);
 
         if (a == 0 ) {
+            ArrayList<Product> Productlist = ProductDao.getAllRecordsByCategory(name);
+            java.util.Iterator<Product> itrPro = Productlist.iterator();
+            String Sold_out = "Sold out";
+            Category Soldoutcg = CategoryDao.getCategoryByname(Sold_out);
+            while (itrPro.hasNext() ) {
+                Product ProductObj = itrPro.next();
+                ProductObj.setCategory(Soldoutcg.getName());
+                ProductObj.setCategory_ID(Soldoutcg.getId());
+                ProductDao.update(ProductObj);
+            }
             CategoryDao.delete(id);
             setVisible(false);
             new ManageCategory().setVisible(true);
-
+            
         }
     }//GEN-LAST:event_jTable1MouseClicked
 
