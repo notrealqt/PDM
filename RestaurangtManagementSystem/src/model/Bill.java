@@ -6,7 +6,7 @@ public class Bill {
     private String mobileNumber;
     private String email;
     private String date;
-    private String total;
+    private Double total;
     private int sellerID;
 
     public int getId() {
@@ -49,11 +49,11 @@ public class Bill {
         this.date = date;
     }
 
-    public String getTotal() {
+    public Double getTotal() {
         return total;
     }
 
-    public void setTotal(String total) {
+    public void setTotal(Double total) {
         this.total = total;
     }
 

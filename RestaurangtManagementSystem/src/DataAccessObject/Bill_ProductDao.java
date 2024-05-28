@@ -14,7 +14,7 @@ import model.Bill_Product;
  */
 public class Bill_ProductDao {
     public static void save(Bill_Product bill_Product){
-        String query = "insert into bill_product (BillID, ProductID) value('"+bill_Product.getBillID()+"', '"+bill_Product.getProductID()+"')";
+        String query = "insert into bill_product (BillID, ProductID, Quantity, Paid) value('"+bill_Product.getBillID()+"', '"+bill_Product.getProductID()+"', '"+bill_Product.getQuatity()+"', '"+bill_Product.getPaid()+"')";
         DbOperation.setDataOrDelete(query, "Bill_Product saved Successfully");
     }
     

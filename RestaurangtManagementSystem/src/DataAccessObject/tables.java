@@ -41,13 +41,15 @@ public class tables {
                                 +"mobileNumber VARCHAR(200),"
                                 +"email VARCHAR(200),"
                                 +"date VARCHAR(50),"
-                                +"total VARCHAR(200),"
+                                +"total DECIMAL(10, 2),"
                                 +"SellerID INT,"
                                 +"FOREIGN KEY (SellerID) REFERENCES rms.user(id))";
             
             String Bill_ProductTable = "CREATE TABLE IF NOT EXISTS rms.Bill_Product ("
                                 +"BillID INT,"
                                 +"ProductID INT,"
+                                +"Quantity INT,"
+                                +"Paid DECIMAL(10, 2),"
                                 +"FOREIGN KEY (BillID) REFERENCES rms.bill(id) ON DELETE NO ACTION,"
                                 +"FOREIGN KEY (ProductID) REFERENCES rms.product(id) ON DELETE NO ACTION)";
 

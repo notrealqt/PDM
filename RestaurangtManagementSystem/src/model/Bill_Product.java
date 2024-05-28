@@ -7,7 +7,25 @@ package model;
 public class Bill_Product {
     private int BillID;
     private int ProductID;
+    private int Quatity;
+    private Double Paid;
 
+    public int getQuatity() {
+        return Quatity;
+    }
+
+    public void setQuatity(int Quatity) {
+        this.Quatity = Quatity;
+    }
+
+    public Double getPaid() {
+        return Paid;
+    }
+
+    public void setPaid(Double Paid) {
+        this.Paid = Paid;
+    }
+    
     public int getBillID() {
         return BillID;
     }

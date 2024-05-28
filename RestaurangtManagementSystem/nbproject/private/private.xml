@@ -11,13 +11,6 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/main/RestaurangtManagementSystem.java</file>
-            <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/UI/PlaceOrder.java</file>
-            <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/UI/ModifyProduct.java</file>
-            <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/UI/AddNewProduct.java</file>
-            <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/UI/ManageCategory.java</file>
-            <file>file:/C:/Users/VAN/Documents/GitHub/PDM/RestaurangtManagementSystem/src/DataAccessObject/ProductDao.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -440,7 +440,7 @@ public class PlaceOrder extends javax.swing.JFrame {
         SimpleDateFormat dFormat = new SimpleDateFormat("dd-MM-yyyy");
         Date date = new Date();
         String todaydate = dFormat.format(date);
-        String total = String.valueOf(grandTotal); // Use grandTotal here
+        Double total = grandTotal; // Use grandTotal here
         String createdBy = userEmail;
         Bill bill = new Bill();
         bill.setId(billID);
@@ -494,6 +494,8 @@ public class PlaceOrder extends javax.swing.JFrame {
             int product_Id;
             for (int i = 0; i < jTable2.getRowCount(); i++) {
                 String Product_Name = jTable2.getValueAt(i, 0).toString(); // Name column
+                int quality = (int) jTable2.getValueAt(i, 2);
+                Double Paid = (Double) jTable2.getValueAt(i, 3);
                 try {
                     ResultSet rs = DbOperation.getData("select id from product where name = '"+Product_Name+"'");
                     if(rs.next()) {
@@ -501,6 +503,8 @@ public class PlaceOrder extends javax.swing.JFrame {
                         Bill_Product bp = new Bill_Product();
                         bp.setBillID(billID);
                         bp.setProductID(product_Id);
+                        bp.setQuatity(quality);
+                        bp.setPaid(Paid);
                         Bill_ProductDao.save(bp);
                    }
                 }
